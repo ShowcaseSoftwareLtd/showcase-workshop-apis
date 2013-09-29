@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Form Test</title>
+    <script src="../showcase-data.js"></script>
+    <script src="../libs/jquery/jquery-1.10.2.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            var sc_data = SHOWCASE_DATA();
+
+            //var sc_data = SHOWCASE_DATA({'testMode': true});  // if testMode is true then wou can run outside of iOS
+
+            $(document).on('click', '.put-button', function(e) {
+                e.preventDefault();
+                var form_data = $('.my-form').serializeArray();
+                var form_as_string = JSON.stringify(form_data);
+                sc_data.put('current-form-data', form_as_string);
+                $('.my-form-log').prepend('<br/>Put ' + form_as_string);
+            });
+
+            sc_data.global_get_callback(function(key, value) {
+                if (key == 'current-form-data') {
+                    $('.my-form-log').prepend('<br/>Get Callback ' + key + ': ' + value);
+                }
+            });
+
+            $(document).on('click', '.get-button', function(e) {
+                e.preventDefault();
+                sc_data.get('current-form-data');
+                $('.my-form-log').prepend('<br/>Get');
+            });
+
+            $(document).on('click', '.store-button', function(e) {
+                e.preventDefault();
+                sc_data.store('current-form-data');
+                $('.my-form-log').prepend('<br/>Get');
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+    <h1>Simple Form Test</h1>
+
+    <form class="my-form">
+
+        First Name <input name="first_name" type="text" value="Bill"/>
+        <br/>Last Name <input name="last_name" type="text" value="Cosby"/>
+        <br/>
+        <br/><button class="put-button">Put</button> Save data to the device memory
+        <br/><button class="get-button">Get</button> Get data fromf device memory
+        <br/><button class="store-button">Store</button> Store the data remotely at showcaseworkshop.com
+
+        <div class="my-form-log"></div>
+
+    </form>
+
+
+<style>
+    .my-form-log {
+        color: silver;
+    }
+</style>
+</body>
+</html>
