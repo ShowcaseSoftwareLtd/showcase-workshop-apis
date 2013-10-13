@@ -1,9 +1,33 @@
-
 Showcase Workshop Data API
 ==========================
 
-A simple data storage API for use in JavaScript and HTML that has been loaded via Showcase iPad app.  The data API
-allows storage of key value pairs into the device memory.  This memory is kept only on the current device until the
+A simple data storage API for use by web content which has been loaded into a Showcase. At present web content
+is only viewable via the Showcase Workshop iPad and iPhone Viewers.
+
+
+## Web Content Zip File
+
+This is a zip file which may contain generic web content (html, javascript, css, etc.). This file's contents
+will be loaded within the custom browser container within the Viewer App.
+
+The only required file is `index.html` at the root of the zip file. The custom browser container will 
+initialize with this file.
+
+If your application needs to use the showcase data api, it must include `showcase-data-api.js` (see examples).
+
+If subfolders are included in your web content, references to content must use relative 
+paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
+
+The file name of the zip must end in `.html.zip` to be recognized by Showcase Workshop. These files need to be
+uploaded into the Showcase Workshop File Library.
+
+To embed a web content zip file into a Showcase, choose the button which will contain the web content, then set
+the target content type to be Document, then choose the `.html.zip` file as the target document.
+
+
+## Javascript Data API
+
+The data API allows storage of key value pairs into the device memory.  This memory is kept only on the current device until the
 Showcase app is removed or reinstalled.  Individual keys can be sent to the remote Showcase server.  These remotely
 saved keys and values are available from the server API.
 
@@ -37,7 +61,7 @@ Get a value:
     sc_data.get('current_form_data');
 
 
-Send key to remote Showcase server:
+Send key to remote Showcase Workshop server:
 
     // snapshot the current form data
     sc_data.put('form_data_20130912_0912', JSON.stringify(form_data));
@@ -47,3 +71,4 @@ Send key to remote Showcase server:
 
 
 See `examples/simple.html` for a more practical example.
+
