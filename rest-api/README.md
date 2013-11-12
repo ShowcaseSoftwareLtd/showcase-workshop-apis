@@ -1,6 +1,20 @@
 Showcase Workshop REST API
 ==========================
 
+The API conforms to [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) design
+principles. You interact with API by accessing URIs
+using the HTTP verbs (GET, POST, PUT, and DELETE).
+
+The server will always respond with JSON data.
+
+HTTP statuses returned
+
+    200 ok
+    401 unauthenticated
+    403 unauthorized
+    404 not found
+    500 server error
+
 
 ## Authorization
 
@@ -12,18 +26,6 @@ Append `access_token` as a get parameter to every request.  eg:
 
 If the key is bad you will get an `HTTP 401` error.
 
-
-## Responses
-
-The server will always respond with JSON data.
-
-HTTP statuses returned
-
-    200 ok
-    401 unauthenticated
-    403 unauthorized
-    404 not found
-    500 server error
 
 
 ## List Form Data
