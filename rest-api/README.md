@@ -62,24 +62,31 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
         | Status: 200 OK
 
         {
-            guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd"
-            date_inserted: "2013-01-28T13:01:01+00:00"  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-            form_name: "Form1"
-            showcase_name: "My Showcase"
+            guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
+            date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            user_email: "bob@example.com",
+            form_name: "Form1",
+            showcase_name: "My Showcase",
+            showcase_id: 1234,
             content: "{ a: \"string1\" }"
         }
 
 
 ## Add data
 
+All fields are mandatory
+
     POST /main/api/v1/data/
 
     eg request
 
         {
-            form_name: "Form1"
-            showcase_name: "My Showcase"
-            content: "{ a: \"string1\" }"
+            form_name: "Form1",
+            showcase_id: 1234,
+            user_email: "bob@example.com",
+            content: "{ a: \"string1\" }",
+            date_entered: "2013-01-28T13:01:01+00:00"   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
         }
 
     response
@@ -87,10 +94,12 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
         | Status: 200 OK
 
         {
-            guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd"
-            date_inserted: "2013-01-28T13:01:01+00:00"  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-            form_name: "Form1"
-            showcase_name: "My Showcase"
+            guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
+            date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            form_name: "Form1",
+            user_email: "bob@example.com",
+            showcase_name: "My Showcase",
+            showcase_id: 1234,
             content: "{ a: \"string1\" }"
         }
 
