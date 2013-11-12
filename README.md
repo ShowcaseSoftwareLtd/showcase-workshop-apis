@@ -27,12 +27,12 @@ the target content type to be Document, then choose the `.html.zip` file as the 
 
 ## Javascript Data API
 
-See [javascript-api/README.md]
+See [javascript-api/README.md](javascript-api/README.md)
 
 ## REST API
 
-See [rest-api/README.md]
+See [rest-api/README.md](rest-api/README.md)
 
 ## WebHook API
 
-See [webhook-api/README.md]
+See [webhook-api/README.md](webhook-api/README.md)
