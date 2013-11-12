@@ -17,6 +17,14 @@ If the key is bad you will get an `HTTP 401` error.
 
 The server will always respond with JSON data.
 
+HTTP statuses returned
+
+    200 ok
+    401 unauthenticated
+    403 unauthorized
+    404 not found
+    500 server error
+
 
 ## List Form Data
 
@@ -75,6 +83,8 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
 
 ## Add data
 
+Add an individual item of data.
+
 All fields are mandatory
 
     POST /main/api/v1/data/
@@ -105,6 +115,8 @@ All fields are mandatory
 
 
 ## Delete
+
+Delete some data.
 
     DELETE /main/api/v1/data/{guid}
 
