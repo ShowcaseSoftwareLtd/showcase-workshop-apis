@@ -3,7 +3,7 @@ Showcase Workshop WebHook API
 
 See also [Showcase Workshop REST API](../rest-api/README.md)
 
-When WebHook URL is entered in `Settings &gt; Workspace` and data arrives via the Showcase Data API, we'll send a HTTP
+When WebHook URL is entered in `Settings > Workspace` and data arrives via the Showcase Data API, we'll send a HTTP
 POST request to the URL you've specified.
 
 If that URL is unavailable or takes too long to respond (more than 15 seconds), we'll cancel the request and try
@@ -26,5 +26,5 @@ The request's POST parameters will contain JSON data relevant to the event that 
     }
 
 To test our Webhooks before setting up scripts, the [RequestBin](http://requestb.in/) tool is an good utility that
-helps you see data arrive.  Use the "Test Webhook" function in `Settings &gt; Workspace` with a RequestBin URL to try
+helps you see data arrive.  Use the "Test Webhook" function in `Settings > Workspace` with a RequestBin URL to try
 this.
