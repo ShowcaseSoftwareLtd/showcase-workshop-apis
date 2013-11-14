@@ -4,6 +4,8 @@ Showcase Workshop Data API
 A simple data storage API for use by web content which has been loaded into a Showcase. At present web content
 is only viewable via the Showcase Workshop iPad and iPhone Viewers.
 
+[Showcase Workshop](http://www.showcaseworkshop.com) is an elegant and versatile content management and 
+distribution system for business users of iPads and other tablets.
 
 ## Web Content Zip File
 

@@ -1,6 +1,8 @@
 Showcase Workshop REST API
 ==========================
 
+See also [Showcase Workshop WebHook API](../webhook-api/README.md)
+
 The API conforms to [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) design
 principles. You interact with API by accessing URIs
 using the HTTP verbs (GET, POST, PUT, and DELETE).
@@ -14,6 +16,11 @@ HTTP statuses returned
     403 unauthorized
     404 not found
     500 server error
+    
+## Data type
+
+Each data item has a "data_type" attribute which indicates to API users how to understand the data item's content.
+The values "form" and "unspecified" are reserved for use by Showcase Workshop.
 
 
 ## Authorization
@@ -28,7 +35,7 @@ If the key is bad you will get an `HTTP 401` error.
 
 
 
-## List Form Data
+## List Data
 
     GET /main/api/v1/data/
     curl http://127.0.0.1:8000/main/api/v1/data/?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
@@ -41,10 +48,10 @@ If the key is bad you will get an `HTTP 401` error.
 
         [
             {
-                guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd"
-                date_inserted: "2013-01-28T13:01:01+00:00"  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-                date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-                form_name: "Form1"
+                guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
+                date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+                data_name: "Form1",
+                data_type: "form",
                 showcase_name: "My Showcase"
             },
             ... more items
@@ -63,7 +70,9 @@ the `?page` parameter.
 Note that page numbering is 1-based and that ommiting the ?page parameter will return the first page.
 
 
-## Get individual form data
+## Get data
+
+Get an individual item of data
 
     GET /main/api/v1/data/{uuid}
     curl http://127.0.0.1:8000/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
@@ -79,7 +88,8 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
             date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             user_email: "bob@example.com",
-            form_name: "Form1",
+            data_name: "Form1",
+            data_type: "form",
             showcase_name: "My Showcase",
             showcase_id: 1234,
             content: "{ a: \"string1\" }"
@@ -99,7 +109,8 @@ All fields are mandatory
     eg request
 
         {
-            form_name: "Form1",
+            data_name: "Form1",
+            data_type: "form",
             showcase_id: 1234,
             user_email: "bob@example.com",
             content: "{ a: \"string1\" }",
@@ -113,7 +124,8 @@ All fields are mandatory
         {
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
             date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-            form_name: "Form1",
+            data_name: "Form1",
+            data_type: "form",
             user_email: "bob@example.com",
             showcase_name: "My Showcase",
             showcase_id: 1234,
