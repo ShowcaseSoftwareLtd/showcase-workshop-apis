@@ -19,7 +19,8 @@ The request's POST parameters will contain JSON data relevant to the event that 
             date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             user_email: "bob@example.com",
-            form_name: "Form1",
+            data_name: "Form1",
+            data_type: "form",
             showcase_name: "My Showcase",
             showcase_id: 1234,
             content: "{ a: \"string1\" }"
