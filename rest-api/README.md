@@ -31,6 +31,7 @@ If the key is bad you will get an `HTTP 401` error.
 ## List Form Data
 
     GET /main/api/v1/data/
+    curl http://127.0.0.1:8000/main/api/v1/data/?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
 
     listing
 
@@ -42,6 +43,7 @@ If the key is bad you will get an `HTTP 401` error.
             {
                 guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd"
                 date_inserted: "2013-01-28T13:01:01+00:00"  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+                date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
                 form_name: "Form1"
                 showcase_name: "My Showcase"
             },
@@ -64,6 +66,7 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
 ## Get individual form data
 
     GET /main/api/v1/data/{uuid}
+    curl http://127.0.0.1:8000/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
 
     get data
 
@@ -90,6 +93,8 @@ Add an individual item of data.
 All fields are mandatory
 
     POST /main/api/v1/data/
+    curl --data "form_name=Form1&showcase_id=43&user_email=robert@showcaseworkshop.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" http://127.0.0.1:8000/main/api/v1/data?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
+
 
     eg request
 
@@ -121,6 +126,7 @@ All fields are mandatory
 Delete some data.
 
     DELETE /main/api/v1/data/{guid}
+    curl -X DELETE http://127.0.0.1:8000/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
 
     response
 
