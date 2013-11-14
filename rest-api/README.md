@@ -1,6 +1,8 @@
 Showcase Workshop REST API
 ==========================
 
+See also [../webhook-api/README.md](Showcase Workshop WebHook API)
+
 The API conforms to [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) design
 principles. You interact with API by accessing URIs
 using the HTTP verbs (GET, POST, PUT, and DELETE).
