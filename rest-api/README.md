@@ -49,7 +49,7 @@ If the key is bad you will get an `HTTP 401` error.
         [
             {
                 guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
-                date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+                date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
                 data_name: "Form1",
                 data_type: "form",
                 showcase_name: "My Showcase"
@@ -85,8 +85,8 @@ Get an individual item of data
 
         {
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
-            date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-            date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_entered: "2013-01-28T13:01:01Z",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             user_email: "bob@example.com",
             data_name: "Form1",
             data_type: "form",
@@ -114,7 +114,7 @@ All fields are mandatory
             showcase_id: 1234,
             user_email: "bob@example.com",
             content: "{ a: \"string1\" }",
-            date_entered: "2013-01-28T13:01:01+00:00"   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_entered: "2013-01-28T13:01:01Z"   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
         }
 
     response
@@ -123,7 +123,7 @@ All fields are mandatory
 
         {
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
-            date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             data_name: "Form1",
             data_type: "form",
             user_email: "bob@example.com",
