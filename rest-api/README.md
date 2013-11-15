@@ -103,7 +103,7 @@ Add an individual item of data.
 All fields are mandatory
 
     POST /main/api/v1/data/
-    curl --data "form_name=Form1&showcase_id=43&user_email=robert@showcaseworkshop.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" http://127.0.0.1:8000/main/api/v1/data?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
+    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" http://127.0.0.1:8000/main/api/v1/data?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
 
 
     eg request

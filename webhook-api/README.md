@@ -6,8 +6,7 @@ See also [Showcase Workshop REST API](../rest-api/README.md)
 When WebHook URL is entered in `Settings > Workspace` and data arrives via the Showcase Data API, we'll send a HTTP
 POST request to the URL you've specified.
 
-If that URL is unavailable or takes too long to respond (more than 15 seconds), we'll cancel the request and try
-again later.
+If that URL is unavailable or takes too long to respond (more than 15 seconds), we'll cancel the request. You can always access the data via the REST API.
 
 The request's POST parameters will contain JSON data relevant to the event that triggered the request.
 
@@ -16,8 +15,8 @@ The request's POST parameters will contain JSON data relevant to the event that 
     Body:
     {
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
-            date_inserted: "2013-01-28T13:01:01+00:00",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
-            date_entered: "2013-01-28T13:01:01+00:00",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_entered: "2013-01-28T13:01:01Z",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             user_email: "bob@example.com",
             data_name: "Form1",
             data_type: "form",
@@ -26,6 +25,6 @@ The request's POST parameters will contain JSON data relevant to the event that 
             content: "{ a: \"string1\" }"
     }
 
-To test our Webhooks before setting up scripts, the [RequestBin](http://requestb.in/) tool is an good utility that
-helps you see data arrive.  Use the "Test Webhook" function in `Settings > Workspace` with a RequestBin URL to try
+To test our Webhooks before setting up scripts, the [PostCatcher](http://postcatcher.in/) tool is an good utility that
+helps you see data arrive.  Use the "Test Webhook" function in `Settings > Workspace` with a PostCatcher URL to try
 this.
