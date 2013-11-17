@@ -29,10 +29,6 @@ function SHOWCASE_DATA(settings) {
         }
     }
 
-    var global_callback_fn = function(key, value) {
-        // do nothing by default
-    };
-
     return {
         'get': function(_key) {
             sc_call("GET", _key, "");
@@ -43,7 +39,7 @@ function SHOWCASE_DATA(settings) {
         },
 
         'global_get_callback': function(fn) {
-            global_callback_fn = fn;
+            SHOWCASE_DATA_GLOBAL_GET_CALLBACK = fn;
         },
 
         'store': function(_key) {
@@ -52,3 +48,6 @@ function SHOWCASE_DATA(settings) {
     };
 
 }
+var SHOWCASE_DATA_GLOBAL_GET_CALLBACK = function(key, value) {  // callback registered at the global level
+    // nothing by default
+};
