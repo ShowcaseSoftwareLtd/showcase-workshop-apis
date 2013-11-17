@@ -17,25 +17,25 @@
                 var form_data = $('.my-form').serializeArray();
                 var form_as_string = JSON.stringify(form_data);
                 sc_data.put('current-form-data', form_as_string);
-                $('.my-form-log').prepend('<br/>Put ' + form_as_string);
+                $('.my-form-log').prepend('<br/>Put button clicked: ' + form_as_string);
             });
 
             sc_data.global_get_callback(function(key, value) {
                 if (key == 'current-form-data') {
-                    $('.my-form-log').prepend('<br/>Get Callback ' + key + ': ' + value);
+                    $('.my-form-log').prepend('<br/>Get Callback called with: ' + key + ': ' + value);
                 }
             });
 
             $(document).on('click', '.get-button', function(e) {
                 e.preventDefault();
                 sc_data.get('current-form-data');
-                $('.my-form-log').prepend('<br/>Get');
+                $('.my-form-log').prepend('<br/>Get button clicked');
             });
 
             $(document).on('click', '.store-button', function(e) {
                 e.preventDefault();
                 sc_data.store('current-form-data');
-                $('.my-form-log').prepend('<br/>Get');
+                $('.my-form-log').prepend('<br/>Store button clicked');
             });
 
         });
