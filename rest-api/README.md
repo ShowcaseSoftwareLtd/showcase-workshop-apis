@@ -20,7 +20,7 @@ HTTP statuses returned
 ## Data type
 
 Each data item has a "data_type" attribute which indicates to API users how to understand the data item's content.
-The values "form" and "unspecified" are reserved for use by Showcase Workshop.
+The values `form` and `generic` are reserved for use by Showcase Workshop.
 
 
 ## Authorization
