@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-
 import urllib2
 import urllib
 from StringIO import StringIO
@@ -17,29 +15,28 @@ from optparse import OptionParser
 
 
 ### CONFIGURE HERE
-DEV_KEY = 'abc123'
+DEV_KEY = 'abcd1234'
 access_token_part = '?access_token='+DEV_KEY
 
 
 ### END CONFIGURATION
 
-dst_url = 'https://app.showcaseworkshop.com/main/api/v1/'
+dst_url = 'https://app.showcaseworkshop.com/main/api/v1/data'
 
 # Starting life cycle - Creating object
 data = {
-    'data_name':'Form1',
-    'data_type': 'form',
-    'showcase_id':'1234',
-    'user_email':'bob@example.com',
-    'content':'{\"a\":\"JSON content\"}',
-    'date_entered':'2013-01-28T13:01:01Z'
+    "data_name":"Form1",
+    "data_type": "form",
+    "showcase_id":"3",
+    "user_email":"bob@example.com",
+    "content":"{\"a\":\"JSON content\"}",
+    "date_entered":"2013-01-28T13:01:01Z"
 }
 encoded_data = urllib.urlencode(data)
 req = urllib2.Request(dst_url+access_token_part, encoded_data)
 response = urllib2.urlopen(req)
 result = response.read()
-
-if result.getcode()==200:
+if response.getcode()==200:
     #SUCCESS
     obj_return = json.loads(result)
 else:
@@ -52,11 +49,11 @@ response = urllib2.urlopen(req)
 result = response.read()
 
 guid = ''
-if result.getcode()==200:
+if response.getcode()==200:
     #SUCCESS
     obj_results = json.loads(result)
-    for obj in obj_result:
-        guid = obj.guid
+    for obj in obj_results:
+        guid = obj['guid']
 else:
     #ERROR
     raise Exception('Error while listing data')
@@ -67,10 +64,10 @@ response = urllib2.urlopen(req)
 result = response.read()
 
 guid = ''
-if result.getcode()==200:
+if response.getcode()==200:
     #SUCCESS
     obj_result = json.loads(result)
-    guid = obj.guid
+    guid = obj['guid']
 else:
     #ERROR
     raise Exception('Error while getting data')
