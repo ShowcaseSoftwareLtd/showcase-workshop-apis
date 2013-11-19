@@ -22,7 +22,7 @@ function SHOWCASE_DATA(settings) {
             if ( type == 'PUT' ) {
                 testData[key] = value;
             }   else if ( type == 'GET') {
-                global_callback_fn(key, testData[key]);
+                SHOWCASE_DATA_GLOBAL_GET_CALLBACK(key, testData[key]);
             }   else if ( type == 'STORE') {
                 alert('Store remotely ' + key + ' ' + testData[key]);
             }
