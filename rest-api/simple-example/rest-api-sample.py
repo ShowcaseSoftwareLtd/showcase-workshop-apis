@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 import urllib2
 import urllib
-from StringIO import StringIO
 import json
-import datetime
-from optparse import OptionParser
 
 
 ######
@@ -25,18 +22,18 @@ dst_url = 'https://app.showcaseworkshop.com/main/api/v1/data'
 
 # Starting life cycle - Creating object
 data = {
-    "data_name":"Form1",
+    "data_name": "Form1",
     "data_type": "form",
-    "showcase_id":"3",
-    "user_email":"bob@example.com",
-    "content":"{\"a\":\"JSON content\"}",
-    "date_entered":"2013-01-28T13:01:01Z"
+    "showcase_id": "3",
+    "user_email": "bob@example.com",
+    "content": "{\"a\":\"JSON content\"}",
+    "date_entered": "2013-01-28T13:01:01Z"
 }
 encoded_data = urllib.urlencode(data)
 req = urllib2.Request(dst_url+access_token_part, encoded_data)
 response = urllib2.urlopen(req)
 result = response.read()
-if response.getcode()==200:
+if response.getcode() == 200:
     #SUCCESS
     obj_return = json.loads(result)
 else:
@@ -49,7 +46,7 @@ response = urllib2.urlopen(req)
 result = response.read()
 
 guid = ''
-if response.getcode()==200:
+if response.getcode() == 200:
     #SUCCESS
     obj_results = json.loads(result)
     for obj in obj_results:
@@ -64,10 +61,10 @@ response = urllib2.urlopen(req)
 result = response.read()
 
 guid = ''
-if response.getcode()==200:
+if response.getcode() == 200:
     #SUCCESS
     obj_result = json.loads(result)
-    guid = obj['guid']
+    guid = obj_result['guid']
 else:
     #ERROR
     raise Exception('Error while getting data')
@@ -77,6 +74,3 @@ opener = urllib2.build_opener(urllib2.HTTPHandler)
 request = urllib2.Request(dst_url+'/'+guid+access_token_part)
 request.get_method = lambda: 'DELETE'
 url = opener.open(request)
-
-
-
