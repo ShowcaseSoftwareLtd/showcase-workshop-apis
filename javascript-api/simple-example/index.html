@@ -23,6 +23,10 @@
             sc_data.global_get_callback(function(key, value) {
                 if (key == 'current-form-data') {
                     $('.my-form-log').prepend('<br/>Get Callback called with: ' + key + ': ' + value);
+                    var obj = JSON.parse(value);
+                    $.each( obj, function( objKey, objValue ) {  // change input boxes to have values we got
+                        $('.my-form input[name="' + objValue.name + '"]').val(objValue.value)
+                    });
                 }
             });
 
