@@ -38,7 +38,7 @@ If the key is bad you will get an `HTTP 401` error.
 ## List Data
 
     GET /main/api/v1/data/
-    curl http://127.0.0.1:8000/main/api/v1/data/?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
+    curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX
 
     listing
 
@@ -60,14 +60,16 @@ If the key is bad you will get an `HTTP 401` error.
 
 ### Parameters
 
-from_date: show form data added after the date specified.  If empty all data is returned
+`from_date`: show form data added after the date specified.  If empty all data is returned.
+
+    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX&&from_date=2013-11-26T00:26:54Z&page=2
 
 Requests that return multiple items will be paginated to 50 items by default. You can specify further pages with
 the `?page` parameter.
 
-    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?page=2
+    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX&page=2
 
-Note that page numbering is 1-based and that ommiting the ?page parameter will return the first page.
+Note, page numbering is 1-based and that omitting the `?page` parameter will return the first page.
 
 
 ## Get data
@@ -75,9 +77,8 @@ Note that page numbering is 1-based and that ommiting the ?page parameter will r
 Get an individual item of data
 
     GET /main/api/v1/data/{uuid}
-    curl http://127.0.0.1:8000/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
-
-    get data
+    
+    curl https://app.showcaseworkshop.com/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
 
     eg response:
 
@@ -103,10 +104,10 @@ Add an individual item of data.
 All fields are mandatory
 
     POST /main/api/v1/data/
-    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" http://127.0.0.1:8000/main/api/v1/data?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
+    
+    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" https://app.showcaseworkshop.com/main/api/v1/data?access_token=XXX
 
-
-    eg request
+    eg, request
 
         {
             data_name: "Form1",
@@ -138,7 +139,8 @@ All fields are mandatory
 Delete some data.
 
     DELETE /main/api/v1/data/{guid}
-    curl -X DELETE http://127.0.0.1:8000/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=a72b90a1-b35b-435b-8df9-8e97e225d955
+
+    curl -X DELETE https://app.showcaseworkshop.com/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
 
     response
 
