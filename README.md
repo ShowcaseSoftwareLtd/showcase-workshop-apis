@@ -9,23 +9,7 @@ distribution system for business users of iPads and other tablets.
 
 ## Web Content Zip File
 
-This is a zip file which may contain generic web content (html, javascript, css, etc.). This file's contents
-will be loaded within the custom browser container within the Viewer App.
-
-The only required file is `index.html` at the root of the zip file. The custom browser container will 
-initialize with this file.
-
-If your application needs to use the showcase data api, it must include `showcase-data-api.js` (see examples).
-
-If subfolders are included in your web content, references to content must use relative 
-paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
-
-The file name of the zip must end in `.html.zip` to be recognized by Showcase Workshop. These files need to be
-uploaded into the Showcase Workshop File Library.
-
-To embed a web content zip file into a Showcase, choose the button which will contain the web content, then set
-the target content type to be Document, then choose the `.html.zip` file as the target document.
-
+See [web-content-zip/README.md](web-content-zip/README.md)
 
 ## Javascript Data API
 
@@ -38,3 +22,16 @@ See [rest-api/README.md](rest-api/README.md)
 ## WebHook API
 
 See [webhook-api/README.md](webhook-api/README.md)
+
+## Pop Up Form
+
+In the target of a hotspot enter the following as a URL for a simple email form:
+
+    showcaseform://{"name":"simple1","fields":[{"name":"email","mandatory":"true","label":"Email","description":"Enter your email"}]}
+
+Name and email:
+
+    showcaseform://{"name":"simple2","fields":[{"name":"name","mandatory":"true","label":"Name","description":"Enter your full name"},{"name":"email","mandatory":"true","label":"Email","description":"Enter your email"}]}
+
+
+Note, this feature is enabled on iPad and iPhone versions of the viewer app.
