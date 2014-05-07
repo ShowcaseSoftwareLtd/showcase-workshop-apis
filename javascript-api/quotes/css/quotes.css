@@ -1,0 +1,11 @@
+#quote-app {
+    padding-top: 70px;
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+
+.logo {
+    margin-left:50px; /* needed to prevent back button overlapping */
+}

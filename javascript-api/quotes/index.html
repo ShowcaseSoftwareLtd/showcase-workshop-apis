@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotes</title>
+    <link rel="stylesheet" type="text/css" href="libs/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/quotes.css" />
+    <script type="text/javascript" src="libs/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="libs/js/underscore-min.js"></script>
+    <script type="text/javascript" src="libs/js/backbone-min.js"></script>
+    <script type="text/javascript" src="libs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/js/showcase-data.js"></script>
+</head>
+<body id="quote-app">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img class="logo" src="img/logo.png" /></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <div class="navbar-right">
+             <button class="btn btn-success navbar-btn" data-toggle="modal" data-target="#new-quote-modal">
+                New Quote
+             </button>
+          </div> 
+        </div><!--/.nav-collapse -->
+      </div>
+    </div> 
+    <div class="container">
+        <div id="quote-list-empty" class="col-md-12"><div class="alert alert-info">No quotes found.</div></div> 
+        <div id="quote-list" class="col-md-6">
+        </div>        
+        <div id="quote-details" class="col-md-6">            
+        </div>        
+    </div>    
+    <div class="modal fade" id="new-quote-modal" data-dismiss="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div id="modal-header" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">New Quote</h4>
+          </div>
+          <div class="modal-body">
+            <div id="new-quote-success" style="display:none;" class="alert alert-success">Your quote has been sent. Thanks. Closing in 3 seconds.</div>
+            <div id="new-quote-error" style="display:none;" class="alert alert-danger">An error occured. Please try again.</div>
+            <form class="form-horizontal" role="form" id="new-quote-form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name<sup>*</sup></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName" name="name" placeholder="John Smith">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputAddress" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputAddress" name="address" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="+64 2...">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail" name="email" placeholder="john.smith@gmail.com">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDetails" class="col-sm-2 control-label">Details</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="inputDetails" name="details" placeholder="Enter details"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputPrice" name="price" placeholder="">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="submit-quote" type="button" class="btn btn-primary">Send</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+
+    <script type="text/template" id="tmpl-quote-details">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Quote #<%- id %> details</h3>
+            </div>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td class="col-md-4">Name</td>
+                    <td class="col-md-8"><%- name %></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Address</td>
+                    <td class="col-md-8"><%- address %></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Phone number</td>
+                    <td class="col-md-8"><%- phone %></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Email</td>
+                    <td class="col-md-8"><%- email %></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Details</td>
+                    <td class="col-md-8"><%- details %></td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">Price</td>
+                    <td class="col-md-8"><%- price %></td>
+                </tr>
+            </table>
+        </div>
+    </script>
+    <script type="text/template" id="tmpl-quote-item">
+        Quote #<%- id %><span class="badge"><span class="glyphicon glyphicon-chevron-right"></span></span>
+    </script>  
+    <script type="text/javascript" src="js/quotes.js"></script>  
+</body>
+</html>
