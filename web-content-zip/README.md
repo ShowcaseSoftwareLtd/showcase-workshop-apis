@@ -28,7 +28,7 @@ the target content type to be Document, then choose the `.html.zip` file as the 
 Sample command line syntax (assumming `simple-example` has `index.html` in it):
 
     cd javascript-api/simple-example
-    zip sample.html.zip *
+    zip -r sample.html.zip *
 
 
 
