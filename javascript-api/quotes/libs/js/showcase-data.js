@@ -1,7 +1,7 @@
 /**
  * Showcase Data API
  *
- * Copyright 2013 Showcase Software Limited
+ * Copyright 2014 Showcase Software Limited
  */
 function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
@@ -25,24 +25,7 @@ function SHOWCASE_DATA(settings) {
         }
     };
     if ( testMode ) {
-        var data = [{
-            name: "Quote 1",
-            saved: true,
-        },
-        {
-            name: "Quote 2",
-            saved: true,
-        },
-        {
-            name: "Quote 3",
-            saved: true,
-        },
-        {
-            name: "Quote 4",
-            saved: true,
-        }];
-        var jsonData = JSON.stringify(data);
-        var testData = {"current-quotes": jsonData};
+        var testData = {};
         sc_call = function(type, key, value) {
             if ( type == 'PUT' ) {
                 testData[key] = value;
@@ -83,8 +66,8 @@ var SHOWCASE_DATA_GLOBAL_GET_CALLBACK = function(key, value) {  // callback regi
 
 var SHOWCASE_DATA_WIN_BRIDGE = [];
 var SHOWCASE_DATA_WIN_BRIDGE_PUSH = function(data) {
-    SHOWCASE_DATA_WIN_BRIDGE.push(data);
+    SHOWCASE_DATA_WIN_BRIDGE.push(JSON.stringify(data));
 };
 var SHOWCASE_DATA_WIN_BRIDGE_POP = function() {
-    return JSON.stringify(SHOWCASE_DATA_WIN_BRIDGE.pop());
+    return SHOWCASE_DATA_WIN_BRIDGE.pop();
 };

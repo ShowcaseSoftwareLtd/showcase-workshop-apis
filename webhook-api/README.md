@@ -6,7 +6,7 @@ See also [Showcase Workshop REST API](../rest-api/README.md)
 When WebHook URL is entered in `Settings > Workspace` and data arrives via the Showcase Data API, we'll send a HTTP
 POST request to the URL you've specified.
 
-If that URL is unavailable or takes too long to respond (more than 15 seconds), we'll cancel the request. You can always access the data via the REST API.
+If that URL is unavailable or takes too long to respond (more than 15 seconds), we'll cancel the request, then try again a few times. You can always access the data via the REST API.
 
 The request's POST parameters will contain JSON data relevant to the event that triggered the request.
 
