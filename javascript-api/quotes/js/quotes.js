@@ -42,7 +42,7 @@ $(function(){
             
             var modelString = JSON.stringify(model);
             sc_data.put('current-form-data', modelString);
-            sc_data.store('current-form-data', modelString);
+            sc_data.store('current-form-data');
             this.saved=true;
             this.active=false;
         }
@@ -197,6 +197,7 @@ $(function(){
     $('#new-quote-modal').on('hide.bs.modal', function () {
        $('#new-quote-modal .alert').hide();
        $('#new-quote-modal #new-quote-form').trigger('reset');
-    })
+       $('#submit-quote').unbind('click');
+    });
     
 }());

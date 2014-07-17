@@ -9,12 +9,17 @@ function SHOWCASE_DATA(settings) {
     var testMode = settings['testMode'] || false;
 
     var sc_call = function(type, key, value) {
-        var srcValue = key + ":##SC" + type + "##" + value;
-        var iframe = document.createElement("IFRAME");
-        iframe.setAttribute("src", srcValue);
-        document.documentElement.appendChild(iframe);
-        iframe.parentNode.removeChild(iframe);
-        iframe = null;
+        if(window.external && window.external.notify) {
+            window.external.notify(JSON.stringify({type: type, key: key, value:value})); 
+        } else {
+            var srcValue = key + ":##SC" + type + "##" + value;
+            var iframe = document.createElement("IFRAME");
+            iframe.setAttribute("src", srcValue);
+            document.documentElement.appendChild(iframe);
+            iframe.parentNode.removeChild(iframe);
+            iframe = null;
+        }
+
     };
     if ( testMode ) {
         var testData = {};
