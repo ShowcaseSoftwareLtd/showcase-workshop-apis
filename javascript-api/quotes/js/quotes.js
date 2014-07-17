@@ -25,7 +25,6 @@ $(function(){
                 email: "",
                 details: "",
                 price: "",
-                saved: false,
                 active: false
             };
         },
@@ -36,14 +35,12 @@ $(function(){
         },
         save: function() {
             var model = this.clone();
-            model.unset("saved", { silent: true });
             model.unset("active", { silent: true });
             model.unset("id", { silent: true });
             
             var modelString = JSON.stringify(model);
             sc_data.put('current-form-data', modelString);
             sc_data.store('current-form-data');
-            this.saved=true;
             this.active=false;
         }
     });
@@ -53,11 +50,6 @@ $(function(){
         model: Quote,    
         comparator: 'id',
         save: function() {
-            _.each(this.models, function(model) {
-                if(model.get("saved")==false) {
-                    model.save();
-                }
-            });
             var collectionString = JSON.stringify(this);
             sc_data.put('current-quotes', collectionString);
         },
@@ -163,20 +155,21 @@ $(function(){
                 data[field.name] = field.value;
             });
             Quotes.add(data, {validate:true}); 
-            $("#modal-header").focus();                      
+            $("#modal-header").focus();                   
         },
         newQuoteError: function(model, error) {
             $("#new-quote-success").hide();
             $("#new-quote-error").html(error).show();
         },
         addOne: function(addedModel, models, options) {
+            addedModel.save();
             Quotes.save();
             if(options.init!=true) {
                 $("#new-quote-error").hide(); 
                 $("#new-quote-success").show();
                 $("#quote-details").html("");
                 setTimeout(function() { $("#new-quote-modal").modal("hide"); $("#quote-list").focus(); }, 3000);
-            }            
+            }           
         }
 
     });
@@ -197,7 +190,6 @@ $(function(){
     $('#new-quote-modal').on('hide.bs.modal', function () {
        $('#new-quote-modal .alert').hide();
        $('#new-quote-modal #new-quote-form').trigger('reset');
-       $('#submit-quote').unbind('click');
     });
     
 }());
