@@ -7,7 +7,6 @@ function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
 
     var testMode = settings['testMode'] || false;
-    var winDataBridgeQueue = [];
 
     var sc_call = function(type, key, value) {
         var is_windows_webview = /MSAppHost/i.test(navigator.userAgent);
@@ -52,10 +51,6 @@ function SHOWCASE_DATA(settings) {
 
         'store': function(_key) {
           sc_call("STORE", _key, "");
-        },
-
-        'win_data_bridge': function() {
-            return winDataBridgeQueue.pop();
         }
     };
 
