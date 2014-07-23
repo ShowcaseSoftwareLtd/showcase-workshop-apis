@@ -1,5 +1,5 @@
-Showcase Workshop Public APIs
-=============================
+Showcase Workshop APIs
+======================
 
 [Showcase Workshop](http://www.showcaseworkshop.com) is an elegant and versatile app builder and 
 distribution system for business users of iPads and other tablets.
