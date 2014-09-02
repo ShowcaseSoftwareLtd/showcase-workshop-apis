@@ -1,5 +1,5 @@
 /**
- * Showcase Data API
+ * Showcase Data API v2
  *
  * Copyright 2014 Showcase Software Limited
  */
@@ -30,6 +30,8 @@ function SHOWCASE_DATA(settings) {
                 testData[key] = value;
             }   else if ( type == 'GET') {
                 SHOWCASE_DATA_GLOBAL_GET_CALLBACK(key, testData[key]);
+            }   else if ( type == 'GETEMAIL') {
+                SHOWCASE_DATA_EMAIL_GET_CALLBACK('example@example.com');
             }   else if ( type == 'STORE') {
                 alert('Store remotely ' + key + ' ' + testData[key]);
             }
@@ -41,12 +43,20 @@ function SHOWCASE_DATA(settings) {
             sc_call("GET", _key, "");
         },
 
+        'getEmail': function() {
+            sc_call("GETEMAIL", "", "");
+        },
+
         'put': function(_key, _val) {
             sc_call("PUT", _key, _val);
         },
 
         'global_get_callback': function(fn) {
             SHOWCASE_DATA_GLOBAL_GET_CALLBACK = fn;
+        },
+
+        'email_get_callback': function(fn) {
+            SHOWCASE_DATA_EMAIL_GET_CALLBACK = fn;
         },
 
         'store': function(_key) {
@@ -56,6 +66,9 @@ function SHOWCASE_DATA(settings) {
 
 }
 var SHOWCASE_DATA_GLOBAL_GET_CALLBACK = function(key, value) {  // callback registered at the global level
+    // nothing by default
+};
+var SHOWCASE_DATA_EMAIL_GET_CALLBACK = function(email) {  // callback registered at the global level
     // nothing by default
 };
 

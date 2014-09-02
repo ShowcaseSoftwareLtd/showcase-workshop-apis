@@ -6,11 +6,17 @@
     <script src="jquery-1.10.2.min.js"></script>
     <script>
 
+        /*
+
+        cd ~/sc/apis/javascript-api/simple-example
+        zip -r ../simple-example-v3.html.zip *
+
+         */
         $(document).ready(function() {
 
             var sc_data = SHOWCASE_DATA();
 
-            //var sc_data = SHOWCASE_DATA({'testMode': true});  // if testMode is true then wou can run outside of iOS
+            // sc_data = SHOWCASE_DATA({'testMode': true});  // if testMode is true then wou can run outside of iOS
 
             $(document).on('click', '.put-button', function(e) {
                 e.preventDefault();
@@ -41,6 +47,15 @@
                 sc_data.store('current-form-data');
                 $('.my-form-log').prepend('<br/>Store button clicked');
             });
+
+            sc_data.email_get_callback(function(email) {
+                $('.my-form-log').prepend('<br/>Email Callback called with: ' + email);
+            });
+
+            setTimeout(function() {
+                sc_data.getEmail();  // after a small delay fetch the email
+
+            }, 1000);
 
         });
 

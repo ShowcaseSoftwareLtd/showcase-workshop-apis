@@ -45,6 +45,14 @@ Send key to remote Showcase Workshop server:
     // store it remotely
     sc_data.store('form_data_20130912_0912');
 
+Get email of the current logged in user (available in Showcase Workshop iOS app version 3.7+):
+
+    // register a function for handling returned email values
+    sc_data.email_get_callback(function(email) {
+        alert('got email ' + email);
+    }
+    sc_data.getEmail();
+
 
 See `examples/simple.html` for a more practical example.
 
