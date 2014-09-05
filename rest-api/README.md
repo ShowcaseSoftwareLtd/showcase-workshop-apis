@@ -34,8 +34,12 @@ Append `access_token` as a get parameter to every request.  eg:
 If the key is bad you will get an `HTTP 401` error.
 
 
+## Data
 
-## List Data
+Generic data storage facility.  Designed to be populated via the [../javascript-api/README.md](../javascript-api/README.md)
+on a device, then retrieved via your servers via this REST api.
+
+### List Data
 
     GET /main/api/v1/data/
     curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX
@@ -58,7 +62,7 @@ If the key is bad you will get an `HTTP 401` error.
         ]
 
 
-### Parameters
+#### Parameters
 
 `from_date`: show form data added after the date specified.  If empty all data is returned.
 
@@ -72,7 +76,7 @@ the `?page` parameter.
 Note, page numbering is 1-based and that omitting the `?page` parameter will return the first page.
 
 
-## Get data
+### Get data
 
 Get an individual item of data
 
@@ -97,7 +101,7 @@ Get an individual item of data
         }
 
 
-## Add data
+### Add data
 
 Add an individual item of data.
 
@@ -134,7 +138,7 @@ All fields are mandatory
         }
 
 
-## Delete
+### Delete
 
 Delete some data.
 
