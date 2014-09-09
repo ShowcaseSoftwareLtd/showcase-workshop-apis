@@ -5,7 +5,7 @@ Showcase Javascript Data API
 
 The data API allows storage of key value pairs into the device memory.  This memory is kept only on the current device until the
 Showcase app is removed or reinstalled.  Individual keys can be sent to the remote Showcase server.  These remotely
-saved keys and values are available from the server API.
+saved keys and values are available from the [../rest-api/README.md](rest-api).
 
 The key value model allows for maximum flexibility to program against as anything that can be serialised to a string
 can be stored and retrieved from device memory.
