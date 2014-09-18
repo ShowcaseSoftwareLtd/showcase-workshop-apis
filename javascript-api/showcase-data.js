@@ -59,6 +59,22 @@ function SHOWCASE_DATA(settings) {
             SHOWCASE_DATA_EMAIL_GET_CALLBACK = fn;
         },
 
+        'hideControls': function(fn) {
+            sc_call("CONTROLSHIDE", "", "");
+        },
+
+        'showControls': function(fn) {
+            sc_call("CONTROLSSHOW", "", "");
+        },
+
+        'back': function(fn) {
+            sc_call("CONTROLSBACK", "", "");
+        },
+
+        'home': function(fn) {
+            sc_call("CONTROLSHOME", "", "");
+        },
+
         'store': function(_key) {
           sc_call("STORE", _key, "");
         }

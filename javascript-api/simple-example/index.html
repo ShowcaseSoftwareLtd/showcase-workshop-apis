@@ -50,6 +50,30 @@
                 $('.my-form-log').prepend('<br/>Store button clicked');
             });
 
+            $(document).on('click', '.controls_hide-button', function(e) {
+                e.preventDefault();
+                sc_data.hideControls();
+                $('.my-form-log').prepend('<br/>Showcase Controls Hide button clicked');
+            });
+
+            $(document).on('click', '.controls_show-button', function(e) {
+                e.preventDefault();
+                sc_data.showControls();
+                $('.my-form-log').prepend('<br/>Showcase Controls Show button clicked');
+            });
+
+            $(document).on('click', '.controls_back-button', function(e) {
+                e.preventDefault();
+                sc_data.back();
+                $('.my-form-log').prepend('<br/>Showcase Controls Back button clicked');
+            });
+
+            $(document).on('click', '.controls_home-button', function(e) {
+                e.preventDefault();
+                sc_data.home();
+                $('.my-form-log').prepend('<br/>Showcase Controls Home button clicked');
+            });
+
             sc_data.email_get_callback(function(email) {
                 $('.my-form-log').prepend('<br/>Email Callback called with: ' + email);
             });
@@ -72,7 +96,7 @@
 </head>
 <body>
 
-    <h1>Simple Form Test</h1>
+    <h1>Simple JavaScript API Test</h1>
 
     <form class="my-form">
 
@@ -82,6 +106,11 @@
         <br/><button class="put-button">Put</button> Save data to the device memory
         <br/><button class="get-button">Get</button> Get data fromf device memory
         <br/><button class="store-button">Store</button> Store the data remotely at showcaseworkshop.com
+        <br/>
+        <br/><button class="controls_hide-button">Hide Controls</button> Showcase Controls are hidden
+        <br/><button class="controls_show-button">Show Controls</button> Showcase Controls are shown
+        <br/><button class="controls_back-button">Back Button</button> Execute a press of the Showcase Back Button
+        <br/><button class="controls_home-button">Home Button</button> Execute a press of the Showcase Home Button
 
         <div class="my-form-log"></div>
 

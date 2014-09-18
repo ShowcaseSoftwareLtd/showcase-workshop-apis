@@ -54,6 +54,27 @@ Get email of the current logged in user (available in Showcase Workshop iOS app 
     sc_data.getEmail();
 
 
+Hide Showcase Controls (available in Showcase Workshop iOS app version 3.7.3+):
+
+    // hide the Showcase Controls (Back Button and Tray Slider)
+    sc_data.hideControls();
+
+Show Showcase Controls (available in Showcase Workshop iOS app version 3.7.3+):
+
+    // show the Showcase Controls (Back Button and Tray Slider)
+    sc_data.showControls();
+
+Execute Showcase Back Button (available in Showcase Workshop iOS app version 3.7.3+):
+
+    //navigate back to the previous Showcase screen
+    sc_data.back();
+
+Execute Showcase Home Button (available in Showcase Workshop iOS app version 3.7.3+):
+
+    //navigate to the portfolio listing screen (home)
+    sc_data.home();
+
+
 See `examples/simple.html` for a more practical example.
 
 
