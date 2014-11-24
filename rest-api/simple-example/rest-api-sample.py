@@ -19,7 +19,7 @@ DEV_KEY = 'XXX'
 
 ### END CONFIGURATION
 
-dst_url = 'https://app.showcaseworkshop.com/main/api/v1/data'
+dst_url = 'https://app.showcaseworkshop.com/api/v1/data'
 access_token_part = '?access_token=' + DEV_KEY
 
 #

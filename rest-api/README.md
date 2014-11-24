@@ -12,8 +12,8 @@ The server will always respond with JSON data.
 HTTP statuses returned
 
     200 ok
-    401 unauthenticated
-    403 unauthorized
+    401 unauthenticated - username or password is incorrect
+    403 unauthorized - user doesn't have correct permissions
     404 not found
     500 server error
     
@@ -29,7 +29,7 @@ Get your developer key from the *Settings/Workspace* tab in Showcase Workshop.
 
 Append `access_token` as a get parameter to every request.  eg:
 
-    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=DEV_KEY
+    $ curl https://app.showcaseworkshop.com/api/v1/data/?access_token=DEV_KEY
 
 If the key is bad you will get an `HTTP 401` error.
 
@@ -42,7 +42,7 @@ on a device, then retrieved via your servers via this REST api.
 ### List Data
 
     GET /main/api/v1/data/
-    curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX
+    curl https://app.showcaseworkshop.com/api/v1/data/?access_token=XXX
 
     listing
 
@@ -66,12 +66,12 @@ on a device, then retrieved via your servers via this REST api.
 
 `from_date`: show form data added after the date specified.  If empty all data is returned.
 
-    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX&&from_date=2013-11-26T00:26:54Z&page=2
+    $ curl https://app.showcaseworkshop.com/api/v1/data/?access_token=XXX&&from_date=2013-11-26T00:26:54Z&page=2
 
 Requests that return multiple items will be paginated to 50 items by default. You can specify further pages with
 the `?page` parameter.
 
-    $ curl https://app.showcaseworkshop.com/main/api/v1/data/?access_token=XXX&page=2
+    $ curl https://app.showcaseworkshop.com/api/v1/data/?access_token=XXX&page=2
 
 Note, page numbering is 1-based and that omitting the `?page` parameter will return the first page.
 
@@ -80,9 +80,9 @@ Note, page numbering is 1-based and that omitting the `?page` parameter will ret
 
 Get an individual item of data
 
-    GET /main/api/v1/data/{uuid}
+    GET /api/v1/data/{uuid}
     
-    curl https://app.showcaseworkshop.com/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
+    curl https://app.showcaseworkshop.com/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
 
     eg response:
 
@@ -107,9 +107,9 @@ Add an individual item of data.
 
 All fields are mandatory
 
-    POST /main/api/v1/data/
+    POST /api/v1/data/
     
-    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" https://app.showcaseworkshop.com/main/api/v1/data?access_token=XXX
+    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" https://app.showcaseworkshop.com/api/v1/data?access_token=XXX
 
     eg, request
 
@@ -142,9 +142,9 @@ All fields are mandatory
 
 Delete some data.
 
-    DELETE /main/api/v1/data/{guid}
+    DELETE /api/v1/data/{guid}
 
-    curl -X DELETE https://app.showcaseworkshop.com/main/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
+    curl -X DELETE https://app.showcaseworkshop.com/api/v1/data/80489c6a-f24e-47c7-a693-aa66bb7aae28?access_token=XXX
 
     response
 
