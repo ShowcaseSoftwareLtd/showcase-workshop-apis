@@ -80,6 +80,7 @@ Execute Showcase Share Button (available in Showcase Workshop iOS app version 4+
     sc_data.share();
 
 
-See `examples/simple.html` for a more practical example.
+See `simple-example/index.html` for a more practical example.
+
 
 
