@@ -74,6 +74,12 @@
                 $('.my-form-log').prepend('<br/>Showcase Controls Home button clicked');
             });
 
+            $(document).on('click', '.controls_share-button', function(e) {
+                e.preventDefault();
+                sc_data.share();
+                $('.my-form-log').prepend('<br/>Showcase Controls Share button clicked');
+            });
+
             sc_data.email_get_callback(function(email) {
                 $('.my-form-log').prepend('<br/>Email Callback called with: ' + email);
             });
@@ -111,6 +117,7 @@
         <br/><button class="controls_show-button">Show Controls</button> Showcase Controls are shown
         <br/><button class="controls_back-button">Back Button</button> Execute a press of the Showcase Back Button
         <br/><button class="controls_home-button">Home Button</button> Execute a press of the Showcase Home Button
+        <br/><button class="controls_share-button">Share Button</button> Execute a press of the Showcase Share Button
 
         <div class="my-form-log"></div>
 

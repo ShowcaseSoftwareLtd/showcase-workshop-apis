@@ -74,6 +74,11 @@ Execute Showcase Home Button (available in Showcase Workshop iOS app version 3.7
     //navigate to the portfolio listing screen (home)
     sc_data.home();
 
+Execute Showcase Share Button (available in Showcase Workshop iOS app version 4+):
+
+    //navigate to the portfolio listing screen (share)
+    sc_data.share();
+
 
 See `examples/simple.html` for a more practical example.
 

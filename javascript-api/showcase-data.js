@@ -75,6 +75,10 @@ function SHOWCASE_DATA(settings) {
             sc_call("CONTROLSHOME", "", "");
         },
 
+        'share': function(fn) {
+            sc_call("CONTROLSSHARE", "", "");
+        },
+
         'store': function(_key) {
           sc_call("STORE", _key, "");
         }
