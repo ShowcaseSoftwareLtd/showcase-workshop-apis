@@ -1,0 +1,13 @@
+form label{
+    font-size: 18px;
+    font-weight: normal;
+}
+
+form input {
+    float:right;
+}
+
+form input[type=submit] {
+    font-size: 18px;
+    font-weight: bold;
+}
