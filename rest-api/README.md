@@ -25,7 +25,7 @@ The values `form` and `generic` are reserved for use by Showcase Workshop.
 
 ## Authorization
 
-Get your developer key from the *Settings/Workspace* tab in Showcase Workshop.
+Get your developer key from the *Settings/Workshop* tab in Showcase Workshop.
 
 Append `access_token` as a get parameter to every request.  eg:
 
