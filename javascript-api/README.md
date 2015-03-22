@@ -50,7 +50,7 @@ Get email of the current logged in user (available in Showcase Workshop iOS app 
     // register a function for handling returned email values
     sc_data.email_get_callback(function(email) {
         alert('got email ' + email);
-    }
+    });
     sc_data.getEmail();
 
 
