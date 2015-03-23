@@ -20,7 +20,7 @@ Setup:
 
 Save or "Put" a value:
 
-    var form_data = {'first_name': 'Bill', 'last_name': 'Cosby'};
+    var form_data = {'first_name': 'Totoro', 'last_name': 'Ghibli'};
     sc_data.put('current_form_data', JSON.stringify(form_data));
 
 
