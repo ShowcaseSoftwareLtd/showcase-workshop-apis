@@ -1,0 +1,64 @@
+
+body {
+    background-color: white;
+}
+a, .display {
+    position: fixed;
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+.base-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+.field, .display, .slider-override {
+    position: fixed;
+    color: #0095da;
+    background: transparent;
+    border: none;
+    font-family: IBC, sans-serif;
+    font-size: 3.5vw;
+    line-height: 130%;
+    font-weight: bold;
+}
+
+
+.display {
+    text-align: center;
+    padding-top: 0.488vw;
+}
+.display.display-sub-total {
+    font-size: 3.42vw;
+    line-height: 170%;
+    text-align: left;
+    color: #777676;
+}
+
+
+.display.display-total {
+    text-align: left;
+    line-height: 160%;
+    font-size: 4.2vw;
+    color: #0095da;
+}
+
+
+.field:focus {
+    outline: none;
+    background-color: #eeeeee;
+    border-radius: 0.29296875vw;
+    border: none;
+}
+.field.err {
+    border: 1px solid red;
+}
+.field {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+}

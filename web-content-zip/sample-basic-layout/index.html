@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Sample</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+
+<div class="calculator calculator-base">
+    <img src="img/base.png" class="base-img"/>
+
+    <div class="display display-sub-total display-saved-miles"
+           style="left: 20vw; top: 25vw; width: 30vw; height: 5vw;">This is some html text</div>
+
+</div>
+
+<script src="libs/underscore/underscore-min.js"></script>
+<script src="libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+
+    "use strict";
+
+    /**
+     * Listen for when local storage is initialised.  LocalStorage is either built-in
+     * or supplied by the Showcase Container.
+     */
+    var onLocalStorageReady = function() {
+        "use strict";
+
+        var ls = window.localStorage;
+        if ( window.showcaseLocalStorage ) ls = window.showcaseLocalStorage;
+
+        if ((navigator.userAgent.match(/Trident/i))) {  // add a class for ie11
+            document.documentElement.className = document.documentElement.className + " trident";
+        }
+        if ((navigator.userAgent.match(/MSIE 10\./i))) {  // add a class for ie11
+            document.documentElement.className = document.documentElement.className + " ie10";
+        }
+
+        // we are loaded and ready to go, use ls for local storage
+
+
+    };
+
+
+    document.addEventListener('showcaseLocalStorage.loaded', onLocalStorageReady);
+    $(function() {
+        if (window.localStorage) onLocalStorageReady();
+        // if local storage built in start now otherwise delay loading until the  container localstorage is ready to go
+    });
+
+
+</script>
+</body>
+</html>

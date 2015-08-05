@@ -21,8 +21,6 @@ To embed a web content zip file into a Showcase, choose the button which will co
 the target content type to be Document, then choose the `.html.zip` file as the target document.
 
 
-
-
 ### Make a Zip in Linux or OSX
 
 Sample command line syntax (assumming `simple-example` has `index.html` in it):
@@ -32,5 +30,32 @@ Sample command line syntax (assumming `simple-example` has `index.html` in it):
 
 
 
-Happy Showcasing.
+### HTML Authoring
 
+Web Content Zips are supported in Showcase client apps for iOS, Chrome and Windows.  As such HTML you author is 
+effectively running in Mobile Safari, Chrome and IE 11.  Any Javascript or CSS you create should work with these
+browsers.
+
+When creating layout it's important to note that the container width may vary in width across devices. To get 
+around this problem we have found it best to use the Viewport Width css unit (vw) and not pixels (px). 
+
+Quick tips:
+
+  - Always use css VW units.  (px will result in inconsistent rendering across device types.
+  - Use animation sparingly, devices with slow CPUs will not handle this well
+  - Use as little JavaScript as possible 
+  - Put as layup into background PNGs as possible (eg, put all visual elements into Photoshop)
+
+  - Use only minimal lightweight frameworks such as: JQuery, Underscore, numeral.js, velocity, 
+  bootstrap js (don't rely on CSS classes from bootstrap as they are not based on VW units!)
+
+Test *everything* on: 
+
+  - Chrome
+  - Mobile Safari
+  - Internet Explorer 11
+
+
+
+
+Happy Showcasing.
