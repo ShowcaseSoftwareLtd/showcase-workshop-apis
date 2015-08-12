@@ -120,5 +120,5 @@ var SHOWCASE_DATA_WIN_BRIDGE_PUSH = function(data) {
     SHOWCASE_DATA_WIN_BRIDGE.push(JSON.stringify(data));
 };
 var SHOWCASE_DATA_WIN_BRIDGE_POP = function() {
-    return SHOWCASE_DATA_WIN_BRIDGE.pop();
+    return SHOWCASE_DATA_WIN_BRIDGE.shift();
 };
