@@ -20,6 +20,9 @@ uploaded into the Showcase Workshop File Library.
 To embed a web content zip file into a Showcase, choose the button which will contain the web content, then set
 the target content type to be Document, then choose the `.html.zip` file as the target document.
 
+Forms can only be previewed in one of the apps (iOS, Windows, or the Chrome Web App), once the content is correctly
+linked and the showcase is published. The web portal won't show forms via Preview or the Showcases tab.
+
 
 ### Make a Zip in Linux or OSX
 
