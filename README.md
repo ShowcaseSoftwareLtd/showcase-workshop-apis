@@ -19,9 +19,9 @@ See [rest-api/README.md](rest-api/README.md)
 
 See [webhook-api/README.md](webhook-api/README.md)
 
-## Web Content Zip File
+## HTML Zip File
 
-See [web-content-zip/README.md](web-content-zip/README.md)
+See [html-zip/README.md](html-zip/README.md)
 
 
 ## Pop Up Form

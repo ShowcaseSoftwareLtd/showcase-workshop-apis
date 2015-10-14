@@ -17,7 +17,7 @@ paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 The file name of the zip must end in `.html.zip` to be recognized by Showcase Workshop. These files need to be
 uploaded into the Showcase Workshop File Library.
 
-To embed a web content zip file into a Showcase, choose the button which will contain the web content, then set
+To embed an HTML zip file into a Showcase, choose the button which will contain the web content, then set
 the target content type to be Document, then choose the `.html.zip` file as the target document.
 
 Forms can only be previewed in one of the apps (iOS, Windows, or the Chrome Web App), once the content is correctly
