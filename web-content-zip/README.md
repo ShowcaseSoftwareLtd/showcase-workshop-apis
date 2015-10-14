@@ -1,6 +1,6 @@
 
 
-Showcase Workshop Web Content Zip File
+Showcase Workshop HTML Zip File
 ======================================
 
 This is a zip file which may contain generic web content (html, javascript, css, etc.). This file's contents
@@ -35,7 +35,7 @@ Sample command line syntax (assumming `simple-example` has `index.html` in it):
 
 ### HTML Authoring
 
-Web Content Zips are supported in Showcase client apps for iOS, Chrome and Windows.  As such HTML you author is 
+HTML Zips are supported in Showcase client apps for iOS, Chrome and Windows.  As such HTML you author is 
 effectively running in Mobile Safari, Chrome and IE 11.  Any Javascript or CSS you create should work with these
 browsers.
 
