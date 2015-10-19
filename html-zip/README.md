@@ -26,7 +26,7 @@ linked and the showcase is published. The web portal won't show forms via Previe
 
 ### Make a Zip in Linux or OSX
 
-Sample command line syntax (assumming `simple-example` has `index.html` in it):
+Sample command line syntax (assuming `simple-example` has `index.html` in it):
 
     cd javascript-api/simple-example
     zip -r sample.html.zip *
