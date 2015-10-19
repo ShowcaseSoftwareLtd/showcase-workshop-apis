@@ -24,7 +24,7 @@ See [webhook-api/README.md](webhook-api/README.md)
 See [html-zip/README.md](html-zip/README.md)
 
 
-## Pop Up Form
+## Showcase Form
 
 In the target URL of a button enter the following as a URL for a simple email form:
 
