@@ -10,15 +10,15 @@ therefore seamless and appears to be a natural extension of the App.
 
 ### Requirements
 
-- At present, HTML .zips work on the Showcase iOS, Windows, and Chrome Apps only.
+- At present, HTML .zips work on the Showcase iOS, Android, Windows, and Chrome Apps only.
 
 - The only required file is `index.html` at the root of the .zip file. The custom browser container will initialize
 with this file.
 
 - The file name of the zip must end in `.html.zip` to be recognized by Showcase Workshop.
 
-- HTML .zips can only be previewed in one of the apps (iOS, Windows, or the Chrome App), once the content is correctly
-linked and the showcase is published. The webapp won't show .zips via Preview or the Showcases tab, even if the HTML
+- HTML .zips can only be previewed in one of the apps (iOS, Android, Windows, or the Chrome App), once the content is correctly
+linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab, even if the HTML
 .zip has been correctly linked and published.
 
 - If your application needs to use the Showcase data API, it must include `showcase-data-api.js` (see examples).
@@ -48,7 +48,7 @@ not pixels (px).
    Use only minimal lightweight frameworks such as: JQuery, Underscore, numeral.js, velocity, bootstrap js
 (don't rely on CSS classes from bootstrap, as they are not based on VW units!).
 
-3. As the supported apps are for iOS, Chrome, and Windows, any HTML you author is effectively running in Mobile Safari, Chrome and IE 11.
+3. As the supported apps are for iOS, Android, Chrome, and Windows, any HTML you author is effectively running in Mobile Safari, Android Webview, Chrome and IE 11.
 
    Any Javascript or CSS you create should work with these browsers.
 
@@ -72,8 +72,8 @@ Workshop File Library.
 To embed an HTML .zip file into a Showcase, choose the button which will contain the web content, then set the target
 content type to be Document, then choose the `.html.zip` file as the target document.
 
-Remember, HTML .zips can only be previewed in one of the apps (iOS, Windows, or the Chrome App), once the content
-is correctly linked and the showcase is published. The webapp won't show .zips via Preview or the Showcases tab,
+Remember, HTML .zips can only be previewed in one of the apps (iOS, Android, Windows, or the Chrome App), once the content
+is correctly linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab,
 even if the HTML .zip has been correctly linked and published.
 
 For assistance with any of the above, hit up support@showcaseworkshop.com.
