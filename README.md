@@ -35,4 +35,4 @@ Name and email:
     showcaseform://{"name":"simple2","fields":[{"name":"name","mandatory":"true","label":"Name","description":"Enter your full name"},{"name":"email","mandatory":"true","label":"Email","description":"Enter your email"}]}
 
 
-Note, this feature is enabled on iPad and iPhone versions of the Showcase Workshop app.
+Note, this feature is enabled on iPad, iPhone, Andrioid, Windows and Chrome App versions of the Showcase Workshop app.
