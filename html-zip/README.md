@@ -10,7 +10,7 @@ therefore seamless and appears to be a natural extension of the App.
 
 ### Requirements
 
-- At present, HTML .zips work on the Showcase iOS, Android, Windows, and Chrome Apps only.
+- At present, HTML .zips work on the Showcase iOS, Android, Windows, and Chrome Apps.
 
 - The only required file is `index.html` at the root of the .zip file. The custom browser container will initialize
 with this file.
