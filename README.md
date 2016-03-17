@@ -1,7 +1,7 @@
 Showcase Workshop APIs
 ======================
 
-[Showcase Workshop](http://showcaseworkshop.com) is an elegant and versatile app builder and 
+[Showcase Workshop](https://showcaseworkshop.com) is an elegant and versatile app builder and
 distribution system for business users of iPads and other tablets.
 
 ## Javascript Data API
