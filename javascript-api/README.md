@@ -83,7 +83,6 @@ Execute Showcase Share Button (available in Showcase Workshop iOS app version 4+
 See `simple-example/index.html` for a more practical example.
 
 
-
 ### Make a Zip in Linux or OSX
 
 Sample command line syntax (assuming `simple-example` has `index.html` in it):

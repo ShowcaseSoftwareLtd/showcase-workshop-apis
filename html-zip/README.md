@@ -1,12 +1,14 @@
 
 
 Showcase Workshop HTML Zip File
-======================================
+===============================
+
 This is a .zip file which may contain generic web content (HTML, JavaScript, CSS, etc.). The main applications are for
 branded forms that capture data, or for calculators that return an output to the user.
 
 The file's contents will be loaded within the custom browser container within the Showcase App. User experience is
 therefore seamless and appears to be a natural extension of the App.
+
 
 ### Requirements
 
@@ -31,6 +33,7 @@ along the bottom edge and in the top right corner.
 
 - The orientation of the .zip’s appearance needs to be consistent with the orientation of the showcase – e.g., an
 HTML page cannot appear portrait within a landscape showcase, and vice versa.
+
 
 ### How to author HTML .zips for Showcase
 
@@ -57,12 +60,14 @@ not pixels (px).
    - Mobile Safari
    - Internet Explorer 11
 
+
 ### Make a Zip in Linux or OSX
 
 Sample command line syntax (assuming `simple-example` has `index.html` in it):
 
     cd html-zip/sample-basic-layout
     zip -r ../sample-basic-layout.html.zip *
+
 
 ### Putting the HTML .zip into Showcase
 
@@ -76,6 +81,6 @@ Remember, HTML .zips can only be previewed in one of the apps (iOS, Android, Win
 is correctly linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab,
 even if the HTML .zip has been correctly linked and published.
 
-For assistance with any of the above, hit up support@showcaseworkshop.com.
+For assistance with any of the above, hit up helpdesk@showcaseworkshop.com.
 
 Happy Showcasing!
