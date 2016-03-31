@@ -84,3 +84,15 @@ See `simple-example/index.html` for a more practical example.
 
 
 
+### Make a Zip in Linux or OSX
+
+Sample command line syntax (assuming `simple-example` has `index.html` in it):
+
+    cd javascript-api/simple-example
+    zip -r ../simple-example.html.zip *
+
+
+Or for the quotes sample:
+
+    cd javascript-api/quotes
+    zip -r ../quotes.html.zip *

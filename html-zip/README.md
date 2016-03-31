@@ -61,8 +61,8 @@ not pixels (px).
 
 Sample command line syntax (assuming `simple-example` has `index.html` in it):
 
-    cd javascript-api/simple-example
-    zip -r sample.html.zip *
+    cd html-zip/sample-basic-layout
+    zip -r ../sample-basic-layout.html.zip *
 
 ### Putting the HTML .zip into Showcase
 
