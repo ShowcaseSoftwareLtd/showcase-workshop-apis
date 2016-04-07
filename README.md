@@ -26,7 +26,7 @@ See [html-zip/README.md](html-zip/README.md)
 
 ## Showcase Form
 
-In the target URL of a button enter the following as a URL for a simple email form:
+In the target URL of a hotspot enter the following as a URL for a simple email form:
 
     showcaseform://{"name":"simple1","fields":[{"name":"email","mandatory":"true","label":"Email","description":"Enter your email"}]}
 
