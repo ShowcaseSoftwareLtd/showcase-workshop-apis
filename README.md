@@ -33,6 +33,8 @@ In the target URL of a hotspot enter the following as a URL for a simple email f
 Name and email:
 
     showcaseform://{"name":"simple2","fields":[{"name":"name","mandatory":"true","label":"Name","description":"Enter your full name"},{"name":"email","mandatory":"true","label":"Email","description":"Enter your email"}]}
+    
+Name fields must be alphanumeric, i.e. no gaps or special characters.
 
 
 Note, this feature is enabled on iPad, iPhone, Andrioid, Windows and Chrome App versions of the Showcase Workshop app.
