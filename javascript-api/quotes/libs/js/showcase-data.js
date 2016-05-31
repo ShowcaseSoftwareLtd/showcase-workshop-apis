@@ -1,7 +1,7 @@
 /**
  * Showcase Data API v4
  *
- * Copyright 2015 Showcase Software Limited
+ * Copyright 2016 Showcase Software Limited
  */
 function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
