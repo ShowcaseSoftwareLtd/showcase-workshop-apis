@@ -1,5 +1,5 @@
 /**
- * Showcase Data API v3
+ * Showcase Data API v4
  *
  * Copyright 2015 Showcase Software Limited
  */
@@ -11,11 +11,16 @@ function SHOWCASE_DATA(settings) {
     var is_windows_webview = /MSAppHost/i.test(navigator.userAgent);
     var is_chrome_uiwebview = !is_windows_webview && /Chrome\/[\d+]/i.test(navigator.userAgent);
     var is_ios_uiwebview = !is_chrome_uiwebview && !is_windows_webview && /AppleWebKit/i.test(navigator.userAgent);
+    var is_ios_wkwebview = window && window.webkit && window.webkit.messageHandlers &&
+        window.webkit.messageHandlers.showcaseData;
 
     var sc_call = function(type, key, value) {
         if ( is_windows_webview ) {
             if ( typeof window.external.notify )
             SHOWCASE_DATA_WIN_BRIDGE_PUSH({type: type, key: key, value: value});
+
+        }   else if (is_ios_wkwebview) {
+            window.webkit.messageHandlers.showcaseData.postMessage({type: type, key: key, value: value});
 
         }   else if (is_ios_uiwebview) {
             var srcValue = key + ":##SC" + type + "##" + value;
