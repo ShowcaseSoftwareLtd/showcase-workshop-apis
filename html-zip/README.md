@@ -28,8 +28,7 @@ linked and the showcase is published. The website won't show .zips via Preview o
 - If subfolders are included in your web content, references to content must use relative
 paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 
-- As with showcase menu screens, active fields or buttons should be kept away from the ‘dead zones’ of the viewport
-along the bottom edge and in the top right corner.
+- As with showcase menu screens, active fields or buttons should be kept away from the ‘dead zones’ of the top left, top right and bottom left corner.
 
 - The orientation of the .zip’s appearance needs to be consistent with the orientation of the showcase – e.g., an
 HTML page cannot appear portrait within a landscape showcase, and vice versa.
@@ -74,7 +73,7 @@ Sample command line syntax (assuming `simple-example` has `index.html` in it):
 Your HTML .zip file, once saved correctly with the extension `.html.zip`, needs to be uploaded into the Showcase
 Workshop File Library.
 
-To embed an HTML .zip file into a Showcase, choose the button which will contain the web content, then set the target
+To embed an HTML .zip file into a Showcase, choose the hotspot which will contain the web content, then set the target
 content type to be Document, then choose the `.html.zip` file as the target document.
 
 Remember, HTML .zips can only be previewed in one of the apps (iOS, Android, Windows, or the Chrome App), once the content
