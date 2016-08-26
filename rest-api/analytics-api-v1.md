@@ -20,7 +20,7 @@ Events share a number of fields in common, however several fields may only be po
 
 The following unique event types may be returned, along with additional fields which may be populated.
 
-* **showcase_view** - A showcase was opened.
+* **showcase_open** - A showcase was opened.
 	* Event Date
 	* Showcase Version
 * **slide_view** - A slide was viewed.
@@ -32,9 +32,14 @@ The following unique event types may be returned, along with additional fields w
 	* Showcase Version
 	* File Identifier
 	* File Name
-* **file_share** - A File or Showcase was shared.
+* **file_share** - A File was shared.
 	* File Identifier
 	* File Name
+	* Shared To Email
+	* Shared To Name
+* **showcase_share** - A Showcase was shared for viewing online.	* Shared To Email
+	* Shared To Name
+* **shared_showcase_view** - A Shared Showcase was viewed.
 	* Shared To Email
 	* Shared To Name
 * **shared_file_view** - A Shared File or Showcase was viewed.
