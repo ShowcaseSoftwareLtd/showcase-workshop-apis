@@ -20,7 +20,7 @@ Events share a number of fields in common, however several fields may only be po
 
 The following unique event types may be returned, along with additional fields which may be populated.
 
-* **showcase_open** - A showcase was opened.
+* **showcase_open** - A Showcase was opened.
 	* Event Date
 	* Showcase Version
 * **slide_view** - A slide was viewed.
@@ -40,6 +40,7 @@ The following unique event types may be returned, along with additional fields w
 * **showcase_share** - A Showcase was shared for viewing online.	* Shared To Email
 	* Shared To Name
 * **shared_showcase_view** - A Shared Showcase was viewed.
+	* Event Date
 	* Shared To Email
 	* Shared To Name
 * **shared_file_view** - A Shared File or Showcase was viewed.
@@ -73,7 +74,7 @@ If the key is bad you will get an `HTTP 401` error.
 
 ### Parameters
 
-- **since_received_date:** (String, optional) Limits analytics data to that received by Showcase web app since the provided date, inclusive. If this parameter is not provided, a default date of 30 days ago is used.
+- **since_received_date:** (String, optional) Limits analytics data to that received by Showcase web app since the provided date, inclusive. Defaults to 30 days ago if ommitted or a future date. If greater than 1 year ago, changed to being 1 year ago.
 - **results_limit:** (Integer, optional) Provide an upper limit to number of events returned. If not present, defaults to 1000. Values greater than 1000 are ignored.
 
 ### Example: 
@@ -85,16 +86,16 @@ If the key is bad you will get an `HTTP 401` error.
 ###Status
   > 200 Ok
   
-Gathers analytic events, orders by event_date inclusive, and returns results.
+Gathers analytic events, ordered by **event_received_date** inclusive, and returns results.
 
 ###Parameters
 
-- **since_received_date:** (String) The *since_received_date* used in the query. Will be either that provided by the client, or an inferred one.
-- **next_since_received_date:** (String, optional) If there is additional analytics data to return, i.e. all 1000 events were returned but more remain, then the value here should be used as the *since_received_date* in the follow-up query.
+- **since_received_date:** (String) The *since_received_date* used in the query. Will be either that provided by the caller, or an inferred one.
+- **next_since_received_date:** (String, optional) Acts as a paging key. If the number of returned results is the *results_limit* and there is additional data to return, then the value here should be used as the *since_received_date* in the follow-up query.
 - **events:** (Array) Events sorted by *event_received_date*.
-  - **event_type:** (String) One of *showcase_view, slide_view, file_view, file_share, shared_file_view, shared_file_download*.
-  - **event_received_date:** (String) When the event was received by Showcase web app (this may differ substantially from *event_date*, because devices may be offline when Showcase is in use).
-  - **event_date:** (String, optional) When the event occurred, according to each devices clock. Not available for all events.
+  - **event_type:** (String) One of the event types listed in this API description. E.g. *showcase_view, slide_view*, etc.
+  - **event_received_date:** (String) The time when the event was received by Showcase web app (this may differ substantially from *event_date*, because devices may be offline when Showcase is in use).
+  - **event_date:** (String, optional) The time when the event occurred, according to each devices clock. Not available for all events.
   - **event_id:** (String) Unique identifier for the event.
   - **user_id:** (Integer) Identifier of the user.
   - **user_email:** (String) Email of the user.
@@ -102,10 +103,10 @@ Gathers analytic events, orders by event_date inclusive, and returns results.
   - **showcase_name:** (String) Name of the Showcase.
   - **showcase_version:** (Integer, optional) Version of the Showcase. Populated for *showcase_view*, *slide_view* and *file_view* events.
   - **slide_name:** (String, optional) E.g. "glam_rock.png" - if the slide has a background image. Populated for *slide_view* events if the slide's background image exists.
-  - **file_id:** (Integer, optional) Unique identifier for the resource. Populated for *resource_view* events.
-  - **file_name:** (String, optional) E.g. "Pricelist.pdf". Populated for *resource_view* events.
-  - **shared_to_email:** (String, optional) E.g. "bob.smith@company.com". Populated for sharing event types.
-  - **shared_to_name:** (String, optional) E.g. "Bob". Populated for sharing event types, if it was provided by the Showcase user in the share dialog.
+  - **file_id:** (Integer, optional) Unique identifier for the resource. Populated for *file_view*, *file_share*, *shared_file_view* and *shared_file_download* events.
+  - **file_name:** (String, optional) E.g. "Pricelist.pdf". Populated whenever **file_id** is populated.
+  - **shared_to_email:** (String, optional) The email address of the sharing event recipient. Populated for *file_share*, *showcase_share*, *shared_showcase_view*, *shared_file_view*, *shared_file_download*.
+  - **shared_to_name:** (String, optional) The name of the email address recipient, if available. May be populated for the same event types as **shared_to_email**.
 
 ###Example
 
@@ -140,7 +141,7 @@ Gathers analytic events, orders by event_date inclusive, and returns results.
 			"file_id" : 387826,
 			"file_name" : "Pricelist.pdf",
 			"shared_to_email" : "john.black@company.com",
-			"shared_to_name": "Bob"
+			"shared_to_name": "John Black"
 		},
 		...
 	]
