@@ -38,3 +38,9 @@ Name fields must be alphanumeric, i.e. no gaps or special characters.
 
 
 Note, this feature is enabled on iPad, iPhone, Andrioid, Windows and Chrome App versions of the Showcase Workshop app.
+
+
+## Showcase App Linking (incoming and outgoing)
+
+See [app-links/README.md](app-links/README.md)
+
