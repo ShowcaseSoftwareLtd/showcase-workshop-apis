@@ -13,7 +13,6 @@ Open app and select workshop 12 then showcase 34 (if user has access, if showcas
 `https://app.showcaseworkshop.com/main/app-link/workshop/12/showcase/34`
 
 eg: [https://app.showcaseworkshop.com/main/app-link/](https://app.showcaseworkshop.com/main/app-link/)
-[showcaseworkshop://open](showcaseworkshop://open)
 
 ## Link from a Showcase to a different app (outgoing links)
 
