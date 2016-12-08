@@ -3,6 +3,8 @@
 
 ## Link to the Showcase App (incoming links)
 
+### Preferred URL Technique
+
 You can open the Showcase app from other apps (or a web browser) in iOS and Android using the following URLs:
 
 Open app: `https://app.showcaseworkshop.com/main/app-link/`
@@ -13,6 +15,13 @@ Open app and select workshop 12 then showcase 34 (if user has access, if showcas
 `https://app.showcaseworkshop.com/main/app-link/workshop/12/showcase/34`
 
 eg: [https://app.showcaseworkshop.com/main/app-link/](https://app.showcaseworkshop.com/main/app-link/)
+
+
+### Legacy Schema Technique
+
+Open app: [showcaseworkshop://open](showcaseworkshop://open)
+
+
 
 ## Link from a Showcase to a different app (outgoing links)
 
