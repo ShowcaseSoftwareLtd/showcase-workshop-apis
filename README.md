@@ -37,7 +37,7 @@ Name and email:
 Name fields must be alphanumeric, i.e. no gaps or special characters.
 
 
-Note, this feature is enabled on iPad, iPhone, Andrioid, Windows and Chrome App versions of the Showcase Workshop app.
+Note, this feature is enabled on iPad, iPhone, Android, Windows and Chrome App versions of the Showcase Workshop app.
 
 
 ## Showcase App Linking (incoming and outgoing)
