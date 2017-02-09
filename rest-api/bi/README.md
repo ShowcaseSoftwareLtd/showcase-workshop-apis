@@ -28,7 +28,8 @@ Standard HTTP errors are returned under error conditions.
 
   - `400` Invalid request 
   - `404` Not found 
-  - `401` Authentication incorrect 
+  - `401` Authentication incorrect
+  - `403` You do not have enough permissions
   - `500` Server had an error 
 
 Note, every response object will have a status field that will denote if the request was successful.  At present it is reserved for future use, so that we can report more complex errors than HTTP status codes.  When checking the response to an API call is valid you must always check that the HTTP response code is `200`.
@@ -36,11 +37,10 @@ Note, every response object will have a status field that will denote if the req
 
 ### Pagination
 
-For simplification page sizes are of a fixed size (either 100 or 1,000, documented with each endpoint) and can 
+For simplification result lists are returned in sets of 100 or 1,000 (documented with each endpoint) and can 
 be a `start` parameter can be used to move through the result set. 
 
 If the results were returned in batches of 100 then omitting the `start` parameter will return from 1-100. `?start=100` will return from 100-200.
-
 
 
 ## API Paths
@@ -49,7 +49,6 @@ If the results were returned in batches of 100 then omitting the `start` paramet
 
 Output an array of all users (100 per request) within the workshop with the user information.
 It will also provide info on the groups they are in and showcases that they have access to.
-Users are global and so you may get the same user information when querying different workshops.
 
 ```
 {
@@ -137,7 +136,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 			"id": 525,
 			"slideshow_id": 43,
 			"name": "hello",
-            "sort_order": 1,
+            "sort_order": 0,
 			"inserted_at": "2016-10-05T16:10:44.000000Z",
 			"deleted_at": null
 			"target_file_ids: [1153, 3753],
@@ -146,7 +145,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 			"id": 523,
 			"slideshow_id": 44,
 			"name": "world",
-			"sort_order": 1,
+			"sort_order": 0,
 			"inserted_at": "2016-10-05T16:10:44.000000Z",
 			"deleted_at": "2016-10-05T16:12:44.000000Z"
 			"target_file_ids": []
@@ -162,6 +161,7 @@ Notes:
   - `showcases[x].opening_video_file_id`: Denotes the video (if any) that will play when the showcase is first opened.
   - `showcases[x].opening_slideshow_id`: Denotes the slideshow that will show when the showcase is first opened.  A slideshow is simply a group of slides sorted by `sort_order`.
   - `showcases[x].shareable_files`: Lists file id's that are shareable from the sharing dialog inside that showcase.  Showcases can also be configured to allow sharing of any PDF file that is included as a `target_file_id`.
+  - `showcases[x].slides[y].sort_order`: Integer representing order to present the slides in.  
   - `showcases[x].slides[y].target_file_ids`: Slides can optionally link to files, these are listed in this array of file_ids.  
   - `showcases[x].slides[y].target_slide_ids`: Slides can optionally link to other slides, these are listed in this array of slide_ids.  
 
@@ -170,6 +170,8 @@ Notes:
 
 Output an array of information for the files have been shared (100 per request), including the time and recipient.
 Shared ID’s are unique to shares across all workshops.
+
+Optionally you can specify results from a certain date (`from` parameter specified as a ISO 8601 string)
 
 ```
 {
@@ -199,10 +201,14 @@ Shared ID’s are unique to shares across all workshops.
 }
 ```
 
+Notes:
+
+  - `shared[x].recipient_name`: may be empty or `null` if the user did not specify it.
+
 
 ## /api/v1/bi/analytics_events?from={date}
 
-Output an array of all events (1,000 per request) from a certain date like workshop id, user id, showcase id etc.
+Output an array of all events (1,000 per request) from a certain date (`from` parameter specified as a ISO 8601 string) like workshop id, user id, showcase id etc.
 
 Event ID’s are unique to events across all workshops.
 
