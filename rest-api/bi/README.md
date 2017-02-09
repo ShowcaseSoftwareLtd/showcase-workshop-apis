@@ -43,7 +43,7 @@ be a `start` parameter can be used to move through the result set.
 If the results were returned in batches of 100 then omitting the `start` parameter will return from 1-100. `?start=100` will return from 100-200.
 
 
-## API Paths
+## API Paths: GET
 
 ### /api/v1/bi/users
 
