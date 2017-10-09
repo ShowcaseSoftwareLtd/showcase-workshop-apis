@@ -19,8 +19,11 @@ HTTP statuses returned
     
 ## Data type
 
-Each data item has a "data_type" attribute which indicates to API users how to understand the data item's content.
-The values `form` and `generic` are reserved for use by Showcase Workshop.
+Each data item has a `data_type` attribute, this indicates which API the data came from.
+
+  - `generic`: JavaScript Data API
+  - `form`: Showcase Form
+  - `rest`: REST API
 
 
 ## Authorization
@@ -118,13 +121,12 @@ All fields are mandatory
 
     POST /api/v1/data/
     
-    curl --data "data_name=Form1&data_type=form&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" https://app.showcaseworkshop.com/api/v1/data?access_token=XXX
+    curl --data "data_name=Form1&showcase_id=43&user_email=bob@example.com&content={\"a\":\"string1\"}&date_entered=2013-01-28T13:01:01Z" https://app.showcaseworkshop.com/api/v1/data?access_token=XXX
 
     eg, request
 
         {
             data_name: "Form1",
-            data_type: "form",
             showcase_id: 1234,
             user_email: "bob@example.com",
             content: "{ a: \"string1\" }",
@@ -139,7 +141,7 @@ All fields are mandatory
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
             date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             data_name: "Form1",
-            data_type: "form",
+            data_type: "rest",
             user_email: "bob@example.com",
             showcase_name: "My Showcase",
             showcase_id: 1234,
