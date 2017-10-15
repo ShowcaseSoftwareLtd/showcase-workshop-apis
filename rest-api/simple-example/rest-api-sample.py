@@ -29,10 +29,12 @@ if 1 == 1:  # change to 1 == 2 to disable
     print
     data = {
         "data_name": "Form1",
-        "data_type": "form",
         "showcase_id": "22",
-        "user_email": "paul+1@showcaseworkshop.com",
-        "content": "{\"a\":\"JSON content\"}",
+        "user_email": "paul@showcaseworkshop.com",
+        "content": json.dumps({
+            "form field one": "This is a field value",
+            "multi line form field": "line 1\n line 2"
+        }),
         "date_entered": "2013-01-28T13:01:01Z"
     }
     encoded_data = urllib.urlencode(data)
