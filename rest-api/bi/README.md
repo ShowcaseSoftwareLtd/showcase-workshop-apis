@@ -152,7 +152,11 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 			"target_slide_ids: []
 		}],
 		"shareable_files": [23, 45]
-	}]
+	}],
+	"labels": {
+	    "72": {"bg_color": "#EABE5D", "presentation_ids": [525, 523], "id": 72, "name": "I am a label"},
+	    "71": {"bg_color": "#69835E", "presentation_ids": [525], "id": 71, "name": "I am a label too"}
+    }
 }
 ```
 
