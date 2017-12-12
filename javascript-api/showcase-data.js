@@ -1,7 +1,7 @@
 /**
- * Showcase Data API v4
+ * Showcase Data API v5
  *
- * Copyright 2016 Showcase Software Limited
+ * Copyright 2017 Showcase Software Limited
  */
 function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
@@ -107,8 +107,16 @@ function SHOWCASE_DATA(settings) {
         'share': function() {
             sc_call("CONTROLSSHARE", "", "");
         },
+        /**
+         * @deprecated use putRemote
+         */
         'store': function(_key) {
-            sc_call("STORE", _key, "");
+            setTimeout(function() {  // delay slightly to give put time to complete
+                sc_call("STORE", _key, "");
+            }, 300);
+        },
+        'putRemote': function(_key, _val) {
+            sc_call("PUTREMOTE", _key, _val);
         }
     };
 
