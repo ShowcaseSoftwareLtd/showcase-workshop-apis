@@ -9,29 +9,28 @@
         /*
 
         cd ~/sc/showcase-workshop-apis/javascript-api/simple-example
-        zip -r ../simple-example-v3.html.zip *
-        rm -rf ../../web-content-zip/sample-4.0.0.html.zip
-        zip -r ../../web-content-zip/sample-4.0.0.html.zip *
+        rm -rf ../simple-example.html.zip
+        zip -r ../simple-example.html.zip *
 
          */
         $(document).ready(function() {
 
-            var sc_data = SHOWCASE_DATA();
+            let sc_data = SHOWCASE_DATA();
 
             // sc_data = SHOWCASE_DATA({'testMode': true});  // if testMode is true then wou can run outside of iOS
 
             $(document).on('click', '.put-button', function(e) {
                 e.preventDefault();
-                var form_data = $('.my-form').serializeArray();
-                var form_as_string = JSON.stringify(form_data);
+                let form_data = $('.my-form').serializeArray();
+                let form_as_string = JSON.stringify(form_data);
                 sc_data.put('current-form-data', form_as_string);
                 $('.my-form-log').prepend('<br/>Put button clicked: ' + form_as_string);
             });
 
             sc_data.global_get_callback(function(key, value) {
-                if (key == 'current-form-data') {
+                if (key === 'current-form-data') {
                     $('.my-form-log').prepend('<br/>Get Callback called with: ' + key + ': ' + value);
-                    var obj = JSON.parse(value);
+                    let obj = JSON.parse(value);
                     $.each( obj, function( objKey, objValue ) {  // change input boxes to have values we got
                         $('.my-form input[name="' + objValue.name + '"]').val(objValue.value)
                     });
@@ -44,10 +43,12 @@
                 $('.my-form-log').prepend('<br/>Get button clicked');
             });
 
-            $(document).on('click', '.store-button', function(e) {
+            $(document).on('click', '.put-remote-button', function(e) {
                 e.preventDefault();
-                sc_data.store('current-form-data');
-                $('.my-form-log').prepend('<br/>Store button clicked');
+                let form_data = $('.my-form').serializeArray();
+                let form_as_string = JSON.stringify(form_data);
+                sc_data.putRemote('current-form-data', form_as_string);
+                $('.my-form-log').prepend('<br/>Put remote button clicked');
             });
 
             $(document).on('click', '.controls_hide-button', function(e) {
@@ -106,12 +107,12 @@
 
     <form class="my-form">
 
-        First Name <input name="first_name" type="text" value="Totoro"/>
-        <br/>Last Name <input name="last_name" type="text" value="Ghibli"/>
+        <label>First Name <input name="first_name" type="text" value="Totoro"/></label>
+        <br/><label>Last Name <input name="last_name" type="text" value="Ghibli"/></label>
         <br/>
         <br/><button class="put-button">Put</button> Save data to the device memory
-        <br/><button class="get-button">Get</button> Get data fromf device memory
-        <br/><button class="store-button">Store</button> Store the data remotely at showcaseworkshop.com
+        <br/><button class="get-button">Get</button> Get data from device memory
+        <br/><button class="put-remote-button">Put Remote</button> Save data to device memory then store remotely at showcaseworkshop.com
         <br/>
         <br/><button class="controls_hide-button">Hide Controls</button> Showcase Controls are hidden
         <br/><button class="controls_show-button">Show Controls</button> Showcase Controls are shown

@@ -60,7 +60,7 @@ not pixels (px).
    - Internet Explorer 11
 
 
-### Make a Zip in Linux or OSX
+### Make a Zip in Linux or macOS
 
 Sample command line syntax (assuming `simple-example` has `index.html` in it):
 

@@ -45,7 +45,7 @@ Send key to remote Showcase Workshop server:
     // store it remotely
     sc_data.store('form_data_20130912_0912');
 
-Get email of the current logged in user (available in Showcase Workshop iOS app version 3.7+):
+Get email of the current logged in user:
 
     // register a function for handling returned email values
     sc_data.email_get_callback(function(email) {
@@ -54,27 +54,27 @@ Get email of the current logged in user (available in Showcase Workshop iOS app 
     sc_data.getEmail();
 
 
-Hide Showcase Controls (available in Showcase Workshop iOS app version 3.7.3+):
+Hide Showcase Controls:
 
     // hide the Showcase Controls (Back Button and Tray Slider)
     sc_data.hideControls();
 
-Show Showcase Controls (available in Showcase Workshop iOS app version 3.7.3+):
+Show Showcase Controls:
 
     // show the Showcase Controls (Back Button and Tray Slider)
     sc_data.showControls();
 
-Execute Showcase Back Button (available in Showcase Workshop iOS app version 3.7.3+):
+Execute Showcase Back Button:
 
     //navigate back to the previous Showcase screen
     sc_data.back();
 
-Execute Showcase Home Button (available in Showcase Workshop iOS app version 3.7.3+):
+Execute Showcase Home Button:
 
     //navigate to the portfolio listing screen (home)
     sc_data.home();
 
-Execute Showcase Share Button (available in Showcase Workshop iOS app version 4+):
+Execute Showcase Share Button:
 
     //navigate to the portfolio listing screen (share)
     sc_data.share();
@@ -83,7 +83,7 @@ Execute Showcase Share Button (available in Showcase Workshop iOS app version 4+
 See `simple-example/index.html` for a more practical example.
 
 
-### Make a Zip in Linux or OSX
+### Make a Zip in Linux or macOS
 
 Sample command line syntax (assuming `simple-example` has `index.html` in it):
 
