@@ -6,8 +6,7 @@ distribution system for business users of iPads and other tablets.
 
 ## Javascript Data API
 
-A simple data storage API for use by web content which has been loaded into a Showcase. At present web content
-is only viewable via the Showcase Workshop iPad and iPhone Viewers.
+A simple data storage API for use by web content which has been loaded into a Showcase.
 
 See [javascript-api/README.md](javascript-api/README.md)
 
