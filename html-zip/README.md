@@ -23,7 +23,7 @@ with this file.
 linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab, even if the HTML
 .zip has been correctly linked and published.
 
-- If your application needs to use the Showcase data API, it must include `showcase-data-api.js` (see examples).
+- If your application needs to use the Showcase data API, it must include `showcase-data-api.js` (see examples here: https://github.com/ShowcaseSoftwareLtd/showcase-workshop-apis/blob/master/javascript-api/simple-example/index.html ).
 
 - If subfolders are included in your web content, references to content must use relative
 paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
