@@ -32,9 +32,19 @@ paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 - When the HTML Zip is displayed the app will display it using operating system level browser component:
     - iOS - [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)
     - Android - [WebView](https://developer.android.com/reference/android/webkit/WebView)
-    - Browser - [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) in the browser used
+    - Browser - [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) in the browser used (see notes below))
     - Windows - [Electron WebView](https://www.electronjs.org/docs/api/webview-tag)
     - Mac - [Electron WebView](https://www.electronjs.org/docs/api/webview-tag)
+
+
+
+### Browser display notes
+
+When uploaded the html.zip file is extracted on our servers and a mini-website is created.  When the user clicks the link to
+view the html.zip in their browser they are first authenticated onto this mini-website, given a unique URL and a 
+cookie.  This URL is valid only this user for 7 days for so long as the cookie is valid.
+
+The mini-website is displayed in an `iframe` and the code in the html.zip should allow for this.
 
 
 ### How to author HTML .zips for Showcase
