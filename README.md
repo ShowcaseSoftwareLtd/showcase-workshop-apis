@@ -1,8 +1,9 @@
 Showcase Workshop APIs
 ======================
 
-[Showcase Workshop](https://showcaseworkshop.com) is an elegant and versatile app builder and
-distribution system for business users of iPads and other tablets.
+[Showcase Workshop](https://showcaseworkshop.com) is an elegant and versatile presentation builder and
+distribution system for business users of iPads, iPhones, Windows, Mac OS and Android.
+
 
 ## Javascript Data API
 
@@ -10,13 +11,16 @@ A simple data storage API for use by web content which has been loaded into a Sh
 
 See [javascript-api/README.md](javascript-api/README.md)
 
+
 ## REST API
 
 See [rest-api/README.md](rest-api/README.md)
 
+
 ## WebHook API
 
 See [webhook-api/README.md](webhook-api/README.md)
+
 
 ## HTML Zip File
 
@@ -36,7 +40,20 @@ Name and email:
 Name fields must be alphanumeric, i.e. no gaps or special characters.
 
 
-Note, this feature is enabled on iPad, iPhone, Android, Windows and Chrome App versions of the Showcase Workshop app.
+Note, this feature is enabled on browser, iPad, iPhone, Android, Windows and Mac versions of the Showcase Workshop app.
+
+
+## Hotspot URL Special variables
+
+In the target of a hotspot the following variables are supported:
+
+  - `${userEmail}` - When the Showcase is previewed or viewed on a device this variable will be replace with the email of 
+  the currently logged in user.
+  - `${userInfoJwt}` - When the Showcase is previewed or viewed on a device this variable will be replace with a 
+  [JSON Web Token](https://jwt.io) (JWT).  The JWT contains the keys `email`, `first_name` and `last_name`.  It's 
+  secret that can be used to verify the signature can be found on your workshop settings page.
+
+This is supported progressively for clients that have had releases since February 2020.
 
 
 ## Showcase App Linking (incoming and outgoing)
