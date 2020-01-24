@@ -12,26 +12,29 @@ therefore seamless and appears to be a natural extension of the App.
 
 ### Requirements
 
-- At present, HTML .zips work on the Showcase iOS, Android, Windows, and Chrome Apps.
-
 - The only required file is `index.html` at the root of the .zip file. The custom browser container will initialize
 with this file.
 
 - The file name of the zip must end in `.html.zip` to be recognized by Showcase Workshop.
 
-- HTML .zips can only be previewed in one of the apps (iOS, Android, Windows, or the Chrome App), once the content is correctly
-linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab, even if the HTML
-.zip has been correctly linked and published.
-
-- If your application needs to use the Showcase data API, it must include `showcase-data-api.js` (see examples here: https://github.com/ShowcaseSoftwareLtd/showcase-workshop-apis/tree/master/javascript-api ).
+- If your application needs to use the Showcase data API, it must include `showcase-data.js` (see examples here: 
+https://github.com/ShowcaseSoftwareLtd/showcase-workshop-apis/tree/master/javascript-api).
 
 - If subfolders are included in your web content, references to content must use relative
 paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 
-- As with showcase menu screens, active fields or buttons should be kept away from the ‘dead zones’ of the top left, top right and bottom left corner.
+- As with showcase menu screens, active fields or buttons should be kept away from the ‘dead zones’ of the top left, top
+ right and bottom left corner.
 
-- The orientation of the .zip’s appearance needs to be consistent with the orientation of the showcase – e.g., an
-HTML page cannot appear portrait within a landscape showcase, and vice versa.
+- When an HTML.zip is display the full size of the users screen will be used (ie, it will not be constrained to the size
+ of the showcase.
+ 
+- When the HTML Zip is displayed the app will display it using operating system level browser component:
+    - iOS - [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)
+    - Android - [WebView](https://developer.android.com/reference/android/webkit/WebView)
+    - Browser - [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) in the browser used
+    - Windows - [Electron WebView](https://www.electronjs.org/docs/api/webview-tag)
+    - Mac - [Electron WebView](https://www.electronjs.org/docs/api/webview-tag)
 
 
 ### How to author HTML .zips for Showcase
@@ -50,14 +53,8 @@ not pixels (px).
    Use only minimal lightweight frameworks such as: JQuery, Underscore, numeral.js, velocity, bootstrap js
 (don't rely on CSS classes from bootstrap, as they are not based on VW units!).
 
-3. As the supported apps are for iOS, Android, Chrome, and Windows, any HTML you author is effectively running in Mobile Safari, Android Webview, Chrome and IE 11.
-
-   Any Javascript or CSS you create should work with these browsers.
-
-   Test *everything* on:
-   - Chrome
-   - Mobile Safari
-   - Internet Explorer 11
+3. As the supported apps are for iOS, Android, Windows and Browsers, any HTML you author could be effectively running in 
+Mobile Safari, Android Webview, Chrome, Firefox or Edge.
 
 
 ### Make a Zip in Linux or macOS
@@ -75,10 +72,6 @@ Workshop File Library.
 
 To embed an HTML .zip file into a Showcase, choose the hotspot which will contain the web content, then set the target
 content type to be Document, then choose the `.html.zip` file as the target document.
-
-Remember, HTML .zips can only be previewed in one of the apps (iOS, Android, Windows, or the Chrome App), once the content
-is correctly linked and the showcase is published. The website won't show .zips via Preview or the Showcases tab,
-even if the HTML .zip has been correctly linked and published.
 
 For assistance with any of the above, hit up helpdesk@showcaseworkshop.com.
 
