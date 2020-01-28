@@ -1,23 +1,26 @@
 /**
- * Showcase Data API v6
+ * Showcase Data API v8
  *
- * Copyright 2017 Showcase Software Limited
+ * Copyright 2020 Showcase Software Limited
  */
 function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
 
     var testMode = settings['testMode'] || false;
-    var chromeCallbackSetup = false;
+    var msgListenerSetup = false;
     var is_windows_webview = /MSAppHost/i.test(navigator.userAgent);
-    var is_chrome_uiwebview = !is_windows_webview && /Chrome\/[\d+]/i.test(navigator.userAgent);
-    var is_ios_uiwebview = !is_chrome_uiwebview && !is_windows_webview && /AppleWebKit/i.test(navigator.userAgent);
+
+    // Showcase iOS injects messageHandlers.showcaseData into the window
     var is_ios_wkwebview = window && window.webkit && window.webkit.messageHandlers &&
         window.webkit.messageHandlers.showcaseData;
+    // worst case, we have to use an iframe to target Showcase iOS older than v7
+    var is_ios_uiwebview = !is_ios_wkwebview && !is_windows_webview && !window.postMessage &&
+        /AppleWebKit/i.test(navigator.userAgent) && /Safari/i.test(navigator.userAgent);
 
     var sc_call = function(type, key, value) {
         if ( is_windows_webview ) {
-            if ( typeof window.external.notify )
-            SHOWCASE_DATA_WIN_BRIDGE_PUSH({type: type, key: key, value: value});
+            if (typeof window.external.notify)
+                SHOWCASE_DATA_WIN_BRIDGE_PUSH({type: type, key: key, value: value});
 
         }   else if (is_ios_wkwebview) {
             window.webkit.messageHandlers.showcaseData.postMessage({type: type, key: key, value: value});
@@ -30,21 +33,22 @@ function SHOWCASE_DATA(settings) {
             iframe.parentNode.removeChild(iframe);
             iframe = null;
 
-        }   else if (is_chrome_uiwebview) {
+        }   else if (window.postMessage) {
             // there is a listener at the higher level that will hear this
-            if ( ! chromeCallbackSetup ) {
-                chromeCallbackSetup = true;
+            if ( ! msgListenerSetup ) {
+                msgListenerSetup = true;
                 window.addEventListener('message',function(event) {
                     if ( event && event.data && event.data.SHOWCASE_DATA_CALLBACK ) {
                         window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK(event.data.SHOWCASE_DATA_CALLBACK.key,
-                                                          event.data.SHOWCASE_DATA_CALLBACK.value);
+                            event.data.SHOWCASE_DATA_CALLBACK.value);
                     }
                     if ( event && event.data && event.data.SHOWCASE_DATA_EMAIL_CALLBACK ) {
                         window.SHOWCASE_DATA_EMAIL_GET_CALLBACK(event.data.SHOWCASE_DATA_EMAIL_CALLBACK.value);
                     }
                 }, false);
             }
-            window.postMessage({SHOWCASE_DATA: {type: type, key: key, value: value}}, '*');
+            var msgWin = window.self !== window.parent ? window.parent : window;
+            msgWin.postMessage({SHOWCASE_DATA: {type: type, key: key, value: value}}, '*');
         }
     };
     if ( testMode ) {
@@ -61,8 +65,8 @@ function SHOWCASE_DATA(settings) {
             }
         }
     }
-    if (is_chrome_uiwebview && typeof $ == 'function'){
-        // for chrome only hack in support for showcaseworkshop://*
+    if (window.postMessage && typeof $ == 'function'){
+        // for modern browsers only hack in support for showcaseworkshop://*
         $(document).on('touchstart click', "a[href^='showcaseworkshop://']", function(evt) {
             "use strict";
             evt.preventDefault();
