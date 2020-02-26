@@ -26,10 +26,9 @@ paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 - As with showcase menu screens, active fields or buttons should be kept away from the ‘dead zones’ of the top left, top
  right and bottom left corner.
 
-- When an HTML.zip is display the full size of the users screen will be used (ie, it will not be constrained to the size
- of the showcase.
+- When an HTML.zip is displayed, the full size of the user's screen will be used (i.e., it will not be constrained to the size of the showcase).
  
-- When the HTML Zip is displayed the app will display it using operating system level browser component:
+- When the HTML Zip is displayed the app will display it using operating system-level browser component:
     - iOS - [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)
     - Android - [WebView](https://developer.android.com/reference/android/webkit/WebView)
     - Browser - [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) in the browser used (see notes below))
@@ -40,9 +39,9 @@ paths (e.g. `<script language='javascript' src='lib/jquery.js'>`).
 
 ### Browser display notes
 
-When uploaded the html.zip file is extracted on our servers and a mini-website is created.  When the user clicks the link to
-view the html.zip in their browser they are first authenticated onto this mini-website, given a unique URL and a 
-cookie.  This URL is valid only this user for 7 days for so long as the cookie is valid.
+When uploaded, the html.zip file is extracted on our servers and a mini-website is created.  When the user clicks the link to
+view the html.zip in their browser, they are authenticated onto this mini-website, given a unique URL and a 
+cookie.  This URL is valid only for this user, for 7 days, so long as the cookie is valid.
 
 The mini-website is displayed in an `iframe` and the code in the html.zip should allow for this.
 
@@ -80,8 +79,8 @@ Sample command line syntax (assuming `simple-example` has `index.html` in it):
 Your HTML .zip file, once saved correctly with the extension `.html.zip`, needs to be uploaded into the Showcase
 Workshop File Library.
 
-To embed an HTML .zip file into a Showcase, choose the hotspot which will contain the web content, then set the target
-content type to be Document, then choose the `.html.zip` file as the target document.
+To embed an HTML .zip file into a Showcase, choose a hotspot which you'd like to contain the zip; then set the target
+content type to be Document; then choose the `.html.zip` file as the target document.
 
 For assistance with any of the above, hit up helpdesk@showcaseworkshop.com.
 
