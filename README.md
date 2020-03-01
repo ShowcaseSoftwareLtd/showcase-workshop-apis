@@ -51,7 +51,7 @@ In the target of a hotspot, the following variables are supported:
   the currently logged in user.
   - `${userInfoJwt}` - When the Showcase is previewed or viewed on a device, this variable will be replaced with a 
   [JSON Web Token](https://jwt.io) (JWT).  The JWT contains the keys `email`, `first_name` and `last_name`.  It's a
-  secret that can be used to verify the signature can be found on your workshop settings page.
+  secret that can be used to verify the signature which can be found on your workshop settings page.
 
 This is supported progressively for clients that have had releases since February 2020.
 
