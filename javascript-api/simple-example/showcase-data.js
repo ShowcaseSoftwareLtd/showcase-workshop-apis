@@ -1,5 +1,5 @@
 /**
- * Showcase Data API v8
+ * Showcase Data API v9
  *
  * Copyright 2020 Showcase Software Limited
  */
@@ -47,7 +47,10 @@ function SHOWCASE_DATA(settings) {
                     }
                 }, false);
             }
-            var msgWin = window.self !== window.parent ? window.parent : window;
+            var msgWin;
+            if (/Electron\//i.test(navigator.userAgent)) msgWin = window;   // for electron obviously
+            else if (window.self !== window.parent) msgWin = window.parent;  // for ios
+            else msgWin = window;  // for browser and android
             msgWin.postMessage({SHOWCASE_DATA: {type: type, key: key, value: value}}, '*');
         }
     };
