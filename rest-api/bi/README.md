@@ -61,7 +61,6 @@ It will also provide info on the groups they are in and showcases that they have
         "country": "New Zealand",
         "role": "Editor",  /* one of Admin, Editor, Viewer */
         "groups": [525, 523],
-        "can_access_showcases": [123, 34],
         "inserted_at": "2016-10-05T16:10:44.000000Z",
         "deleted_at": null,
     }]
