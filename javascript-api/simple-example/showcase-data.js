@@ -1,5 +1,5 @@
 /**
- * Showcase Data API v9
+ * Showcase Data API v10
  *
  * Copyright 2020 Showcase Software Limited
  */
@@ -65,6 +65,8 @@ function SHOWCASE_DATA(settings) {
                 window.SHOWCASE_DATA_EMAIL_GET_CALLBACK('example@example.com');
             }   else if ( type == 'STORE') {
                 alert('Store remotely ' + key + ' ' + testData[key]);
+            }   else if ( type == 'PUTREMOTE') {
+                alert('Put first then store remotely ' + key + ' ' + testData[key]);
             }
         }
     }
