@@ -66,6 +66,7 @@ function SHOWCASE_DATA(settings) {
             }   else if ( type == 'STORE') {
                 alert('Store remotely ' + key + ' ' + testData[key]);
             }   else if ( type == 'PUTREMOTE') {
+                testData[key] = value;
                 alert('Put first then store remotely ' + key + ' ' + testData[key]);
             }
         }
