@@ -37,15 +37,7 @@ Save or "Put" a value:
 
 Get a value:
 
-    // register a global function for handling returned values
-    htmlZipApi.global_get_callback(function(key, val) {
-        alert('got value ' + key + ' ' + val);
-        if (val) {
-            var formData = JSON.parse(val);
-            alert(formData);
-        }
-    }
-    htmlZipApi.get('current_form_data');
+    let currentFormData = await htmlZipApi.get('current_form_data');
 
 
 Send key to remote Showcase Workshop server:
@@ -56,13 +48,10 @@ Send key to remote Showcase Workshop server:
     // store it remotely
     htmlZipApi.store('form_data_20130912_0912');
 
+
 Get email of the current logged in user:
 
-    // register a function for handling returned email values
-    htmlZipApi.email_get_callback(function(email) {
-        alert('got email ' + email);
-    });
-    htmlZipApi.getEmail();
+    let email = await htmlZipApi.getEmail();
 
 
 Hide Showcase Controls:
