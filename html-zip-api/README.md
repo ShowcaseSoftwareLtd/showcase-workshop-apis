@@ -112,6 +112,7 @@ Or for the quotes sample:
 
 ```bash
 cd ~/sc/showcase-workshop-apis/html-zip-api
+npm run test
 npm version patch
 npm publish
 # commit & push

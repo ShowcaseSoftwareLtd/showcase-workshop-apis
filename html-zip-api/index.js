@@ -7,32 +7,28 @@
 function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
 
-    var testMode = settings['testMode'] || false;
-    var msgListenerSetup = false;
-    var is_windows_webview = /MSAppHost/i.test(navigator.userAgent);
+    let testMode = settings['testMode'] || false;
+    let restApiMode = settings['restApiMode'] || false;
+    let msgListenerSetup = false;
+    let getPromises = {};
 
-    // Showcase iOS injects messageHandlers.showcaseData into the window
-    var is_ios_wkwebview = window && window.webkit && window.webkit.messageHandlers &&
+    // Showcase Windows Store not supported
+
+    // Showcase Windows (electron) listens for messages via window.postMessage
+    // Showcase Android listens for messages via window.postMessage
+
+    // Showcase iOS older than v7 is not supported
+    // Showcase iOS > v7 injects messageHandlers.showcaseData into the window
+    let isIosWkWebview = window && window.webkit && window.webkit.messageHandlers &&
         window.webkit.messageHandlers.showcaseData;
-    // worst case, we have to use an iframe to target Showcase iOS older than v7
-    var is_ios_uiwebview = !is_ios_wkwebview && !is_windows_webview && !window.postMessage &&
-        /AppleWebKit/i.test(navigator.userAgent) && /Safari/i.test(navigator.userAgent);
 
-    var sc_call = function(type, key, value) {
-        if (is_ios_wkwebview) {
+    let scCall = function(type, key, value) {
+        if (isIosWkWebview) {
             window.webkit.messageHandlers.showcaseData.postMessage({type: type, key: key, value: value});
-
-        }   else if (is_ios_uiwebview) {
-            var srcValue = key + ":##SC" + type + "##" + value;
-            var iframe = document.createElement("IFRAME");
-            iframe.setAttribute("src", srcValue);
-            document.documentElement.appendChild(iframe);
-            iframe.parentNode.removeChild(iframe);
-            iframe = null;
 
         }   else if (window.postMessage) {
             // there is a listener at the higher level that will hear this
-            if ( ! msgListenerSetup ) {
+            if (!msgListenerSetup) {
                 msgListenerSetup = true;
                 window.addEventListener('message',function(event) {
                     if ( event && event.data && event.data.SHOWCASE_DATA_CALLBACK ) {
@@ -44,7 +40,7 @@ function SHOWCASE_DATA(settings) {
                     }
                 }, false);
             }
-            var msgWin;
+            let msgWin;
             if (/Electron\//i.test(navigator.userAgent)) msgWin = window;   // for electron obviously
             else if (window.self !== window.parent) msgWin = window.parent;  // for ios
             else msgWin = window;  // for browser and android
@@ -52,62 +48,86 @@ function SHOWCASE_DATA(settings) {
         }
     };
     if ( testMode ) {
-        var testData = {};
-        sc_call = function(type, key, value) {
-            if ( type == 'PUT' ) {
+        let testData = {};
+        scCall = function(type, key, value) {
+            if ( type === 'PUT' ) {
                 testData[key] = value;
-            }   else if ( type == 'GET') {
-                window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK(key, testData[key]);
-            }   else if ( type == 'GETEMAIL') {
-                window.SHOWCASE_DATA_EMAIL_GET_CALLBACK('example@example.com');
-            }   else if ( type == 'STORE') {
+
+            }   else if ( type === 'GET') {
+                setTimeout(() => {
+                    window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK(key, testData[key]);
+                }, 50);
+
+            }   else if ( type === 'GETEMAIL') {
+                setTimeout(() => {
+                    window.SHOWCASE_DATA_EMAIL_GET_CALLBACK('example@example.com');
+                }, 50);
+
+            }   else if ( type === 'STORE') {
                 alert('Store remotely ' + key + ' ' + testData[key]);
-            }   else if ( type == 'PUTREMOTE') {
+
+            }   else if ( type === 'PUTREMOTE') {
                 alert('Put first then store remotely ' + key + ' ' + testData[key]);
+
             }
         }
     }
     return {
-        'get': function(_key) {
-            sc_call("GET", _key, "");
+        get: function(_key) {
+            return new Promise((resolve, reject) => {
+               getPromises[_key] = {
+                   resolve: resolve, reject: reject
+               }
+               window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK = (k, v) => {
+                   if (timeoutTimer) clearTimeout(timeoutTimer);
+                   getPromises[_key].resolve(v);
+               };
+               let timeoutTimer = setTimeout(() => {
+                   getPromises[_key].reject('Timeout waiting for email');
+               }, 30 * 1000);  // timeout after 30s
+               scCall("GET", _key, "");
+            });
         },
-        'getEmail': function() {
-            sc_call("GETEMAIL", "", "");
+        getEmail: function() {
+            return new Promise((resolve, reject) => {
+               window.SHOWCASE_DATA_EMAIL_GET_CALLBACK = (email) => {
+                   if (timeoutTimer) clearTimeout(timeoutTimer);
+                   resolve(email);
+               };
+               let timeoutTimer = setTimeout(() => {
+                   reject('Timeout waiting for email');
+               }, 30 * 1000);  // timeout after 30s
+               scCall("GETEMAIL", "", "");
+            });
         },
-        'put': function(_key, _val) {
-            sc_call("PUT", _key, _val);
+        put: function(_key, _val) {
+            scCall("PUT", _key, _val);
         },
-        'global_get_callback': function(fn) {
-            window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK = fn;
+        hideControls: function() {
+            scCall("CONTROLSHIDE", "", "");
         },
-        'email_get_callback': function(fn) {
-            window.SHOWCASE_DATA_EMAIL_GET_CALLBACK = fn;
+        showControls: function() {
+            scCall("CONTROLSSHOW", "", "");
         },
-        'hideControls': function() {
-            sc_call("CONTROLSHIDE", "", "");
+        back: function() {
+            scCall("CONTROLSBACK", "", "");
         },
-        'showControls': function() {
-            sc_call("CONTROLSSHOW", "", "");
+        home: function() {
+            scCall("CONTROLSHOME", "", "");
         },
-        'back': function() {
-            sc_call("CONTROLSBACK", "", "");
-        },
-        'home': function() {
-            sc_call("CONTROLSHOME", "", "");
-        },
-        'share': function() {
-            sc_call("CONTROLSSHARE", "", "");
+        share: function() {
+            scCall("CONTROLSSHARE", "", "");
         },
         /**
          * @deprecated use putRemote
          */
-        'store': function(_key) {
+        store: function(_key) {
             setTimeout(function() {  // delay slightly to give put time to complete
-                sc_call("STORE", _key, "");
+                scCall("STORE", _key, "");
             }, 300);
         },
-        'putRemote': function(_key, _val) {
-            sc_call("PUTREMOTE", _key, _val);
+        putRemote: function(_key, _val) {
+            scCall("PUTREMOTE", _key, _val);
         }
     };
 

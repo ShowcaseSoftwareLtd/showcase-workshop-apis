@@ -1,13 +1,13 @@
 {
   "name": "@showcasesoftwareltd/html-zip-api",
   "description": "API that can be used to communicate with the Showcase app when loaded via an HTML Zip",
-  "version": "11.0.3",
+  "version": "11.0.4",
   "module": "index.js",
   "author": "Showcase Software Ltd",
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -18,6 +18,15 @@
     "url": "git+https://github.com/ShowcaseSoftwareLtd/showcase-workshop-apis.git",
     "directory": "embedded-html-api"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    }
+  }
 }
