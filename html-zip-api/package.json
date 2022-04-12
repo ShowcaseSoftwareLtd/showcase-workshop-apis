@@ -1,7 +1,7 @@
 {
   "name": "@showcasesoftwareltd/html-zip-api",
   "description": "API that can be used to communicate with the Showcase app when loaded via an HTML Zip",
-  "version": "11.0.5",
+  "version": "11.0.7",
   "module": "index.js",
   "author": "Showcase Software Ltd",
   "license": "ISC",

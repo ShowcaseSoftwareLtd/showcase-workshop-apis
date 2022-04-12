@@ -8,7 +8,7 @@ function SHOWCASE_DATA(settings) {
     if ( typeof settings != 'object' ) settings = {};
 
     let testMode = settings['testMode'] || false;
-    let restApiMode = settings['restApiMode'] || false;
+    let dataSubmissionApiConfig = settings['dataSubmissionApiConfig'] || null;
     let msgListenerSetup = false;
     let getPromises = {};
 
@@ -23,7 +23,53 @@ function SHOWCASE_DATA(settings) {
         window.webkit.messageHandlers.showcaseData;
 
     let scCall = function(type, key, value) {
-        if (isIosWkWebview) {
+        if (dataSubmissionApiConfig) {
+            let formData = {};
+            setTimeout(() => {  // delay a little so we aren't blocked
+                let formDataCand = window.localStorage.getItem('scHtmlZipData' + dataSubmissionApiConfig.showcaseId);
+                if (formDataCand) formData = JSON.parse(formDataCand);
+            });
+            const _store = () => {
+                let payload = {
+                    data_name: key, data_type: 'generic', workspace_id: dataSubmissionApiConfig.workshopId,
+                    showcase_id: dataSubmissionApiConfig.showcaseId, content: value, date_entered: new Date().toISOString(),
+                    form_data_submission_key: dataSubmissionApiConfig.apiKey
+                }
+                let formData = new FormData();
+                Object.keys(payload).forEach((k) => formData.append(k, payload[k]));
+                fetch(`${dataSubmissionApiConfig.baseUrl}/api/no_auth_v1/form-data-submission`, {
+                    method: 'POST', body: formData
+                }).then(() => {
+                    // posted ok
+                }).catch((e) => {
+                    console.log('Could not post.', e);
+                });
+            }
+            const _put = function() {
+                formData[key] = value;
+                window.localStorage.setItem('scHtmlZipData' + dataSubmissionApiConfig.showcaseId,
+                    JSON.stringify(formData));
+            };
+            if ( type === 'PUT' ) {
+                _put();
+            }   else if ( type === 'GET') {
+                setTimeout(() => {
+                    window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK(key, formData[key]);
+                }, 50);
+            }   else if ( type === 'GETEMAIL') {
+                setTimeout(() => {
+                    // we can't identify the user in this context
+                    window.SHOWCASE_DATA_EMAIL_GET_CALLBACK(null);
+                }, 50);
+            }   else if ( type === 'STORE') {
+                _store();
+            }   else if ( type === 'PUTREMOTE') {
+                _put();
+                _store();
+            }
+            // controls do nothing in this mode
+
+        } else if (isIosWkWebview) {
             window.webkit.messageHandlers.showcaseData.postMessage({type: type, key: key, value: value});
 
         }   else if (window.postMessage) {
