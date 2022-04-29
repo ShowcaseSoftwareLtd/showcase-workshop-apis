@@ -63,4 +63,25 @@ describe('index', () => {
 
 
   });
+
+  describe('check ios api called', () => {
+
+    window.webkit = {
+      messageHandlers: {
+        showcaseData: {
+          postMessage: () => {
+            window.SHOWCASE_DATA_GLOBAL_GET_CALLBACK('hello', 'world2');
+          }
+        }
+      }
+    };
+    const htmlZipApi = new HtmlZipApi({
+      dataSubmissionApiConfig: null
+    });
+
+    test('api local', () => {
+      expect(htmlZipApi.get('hello')).resolves.toBe('world2');
+    });
+
+  });
 });
