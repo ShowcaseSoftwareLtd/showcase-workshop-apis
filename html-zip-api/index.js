@@ -5,10 +5,10 @@
  * Copyright 2020 Showcase Software Limited
  */
 function SHOWCASE_DATA(settings) {
-    if ( typeof settings != 'object' ) settings = {};
+    if (!settings) settings = {testMode: false, dataSubmissionApiConfig: null};
 
-    let testMode = settings['testMode'] || false;
-    let dataSubmissionApiConfig = settings['dataSubmissionApiConfig'] || null;
+    let testMode = settings.testMode;
+    let dataSubmissionApiConfig = settings.dataSubmissionApiConfig;
     let msgListenerSetup = false;
     let getPromises = {};
 
