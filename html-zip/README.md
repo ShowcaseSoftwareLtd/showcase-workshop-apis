@@ -3,7 +3,7 @@
 Showcase Workshop HTML Zip File
 ===============================
 
-This is a .zip file which may contain generic web content (HTML, JavaScript, CSS, etc.). The main applications are for
+This is a `.zip` file which may contain generic web content (HTML, JavaScript, CSS, etc.). The main applications are for
 branded forms that capture data, or for calculators that return an output to the user.
 
 The file's contents will be loaded within the custom browser container within the Showcase App. User experience is
@@ -51,19 +51,9 @@ The mini-website is displayed in an `iframe` and the code in the html.zip should
 1. Put as much layup and graphics into the background png as possible (i.e. create all visual elements in
 Photoshop, Illustrator or InDesign.)
 
-2.	Write your HTML, CSS & JavaScript.  When creating layout, it's important to note that the container width may vary
-in width across devices. To get around this problem we have found it best to use the Viewport Width css unit (vw) and
-not pixels (px).
+2.	Write your HTML, CSS & JavaScript.  Keep in mind that your code may end up running on very old iPhones.  
 
-   Use as little JavaScript as possible.
-
-   Use animation sparingly.
-
-   Use only minimal lightweight frameworks such as: JQuery, Underscore, numeral.js, velocity, bootstrap js
-(don't rely on CSS classes from bootstrap, as they are not based on VW units!).
-
-3. As the supported apps are for iOS, Android, Windows and Browsers, any HTML you author could be effectively running in 
-Mobile Safari, Android Webview, Chrome, Firefox or Edge.
+3. Test your code on iOS Safari, Chrome for Android, Chrome for Windows at any screen size that your end users will be using.
 
 
 ### Make a Zip in Linux or macOS
