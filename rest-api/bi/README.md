@@ -136,6 +136,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 			"id": 525,
 			"slideshow_id": 43,
 			"name": "hello",
+			"thumbnail": "https://sample.showcaseworkshop.com/sample/slide/thumbnail/url.png",
             "sort_order": 0,
 			"inserted_at": "2016-10-05T16:10:44.000000Z",
 			"deleted_at": null
