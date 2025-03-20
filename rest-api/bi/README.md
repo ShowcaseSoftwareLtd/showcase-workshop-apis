@@ -121,6 +121,12 @@ Output an array of all showcases (100 per request) in a workshop with informatio
 It will also show files available to be shared and the files that are on the slides
 Showcase ID’s are unique to showcases across all workshops. Slide ID’s are unique to slides across all workshops.
 
+#### Parameters
+| Parameter | Type   | Details                                                                                                                                  |
+|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------|
+| start     | number | Determines where to start(offset) when listing showcases. <br/>Defaults to 0 if omitted                                                  |
+| per_page  | number | Determines the amount of showcases to return. <br/>Defaults to 50 if omitted or if provided with a negative value <br/>Cannot exceed 100 |
+
 ```
 {
 	"status": "ok",
