@@ -57,6 +57,7 @@ on a device, then retrieved via your servers via this REST api.
             {
                 guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
                 date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+                date_updated: "2013-01-28T13:01:01Z", /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
                 data_name: "Form1",
                 data_type: "form",
                 showcase_id: 3,
@@ -100,6 +101,7 @@ Get an individual item of data
         {
             guid: "abcdefsdfsdfdsfdsf434234dfw4rrsd",
             date_inserted: "2013-01-28T13:01:01Z",  /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
+            date_updated: "2013-01-28T13:01:01Z", /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             date_entered: "2013-01-28T13:01:01Z",   /* date format ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
             user_id: 4,
             user_email: "jimmih@example.com",
