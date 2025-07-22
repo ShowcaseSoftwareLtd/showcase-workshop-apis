@@ -135,6 +135,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 		"title": "Showcase ICT",
 		"thumbnail": "https://sample.showcaseworkshop.com/sample/thumbnail/url.png",
 		"inserted_at": "2016-10-05T16:10:44.000000Z",
+		"updated_at": "2016-10-05T16:12:44.000000Z",
 		"deleted_at": null,
 		"opening_video_file_id": 23,
 		"opening_slideshow_id": 43,
@@ -145,6 +146,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 			"thumbnail": "https://sample.showcaseworkshop.com/sample/slide/thumbnail/url.png",
             "sort_order": 0,
 			"inserted_at": "2016-10-05T16:10:44.000000Z",
+			"updated_at": "2016-10-05T16:10:44.000000Z",
 			"deleted_at": null
 			"target_file_ids: [1153, 3753],
 			"target_slide_ids: [2, 6, 99]
