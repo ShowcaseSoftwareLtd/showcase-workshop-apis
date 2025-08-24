@@ -1,4 +1,3 @@
-
 # Showcase Workshop BI API
 
 Extract the raw data from your workshop so that you can include it in your for Business Intelligence Systems.
@@ -122,10 +121,20 @@ It will also show files available to be shared and the files that are on the sli
 Showcase ID’s are unique to showcases across all workshops. Slide ID’s are unique to slides across all workshops.
 
 #### Parameters
-| Parameter | Type   | Details                                                                                                                                  |
-|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------|
-| start     | number | Determines where to start(offset) when listing showcases. <br/>Defaults to 0 if omitted                                                  |
-| per_page  | number | Determines the amount of showcases to return. <br/>Defaults to 50 if omitted or if provided with a negative value <br/>Cannot exceed 100 |
+| Parameter     | Type   | Details                                                                                                                                                                                                                                                                  |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start         | number | Determines where to start (offset) when listing showcases. Defaults to 0 if omitted                                                                                                                                                                                      |
+| per_page      | number | Determines the amount of showcases to return. Defaults to 50 if omitted or if provided with a negative value. Cannot exceed 100                                                                                                                                          |
+| updated_since | string | Filter by updated_date inclusive lower bound. ISO-8601 timestamp (e.g., 2025-08-18T00:00:00Z). Missing timezone is treated as UTC                                                                                                                                        |
+| updated_until | string | Filter by updated_date inclusive upper bound. ISO-8601 timestamp. Missing timezone is treated as UTC                                                                                                                                                                     |
+| sort          | string | Field to sort by. Allowed: `updated_date`, `id`. Defaults to `id` ascending. If any updated_* filter is provided and sort is omitted, defaults to `updated_date` descending. When sorting by `updated_date`, ties are broken by `id` ascending to keep pagination stable |
+
+Behavior notes
+- If a record has a null `updated_date`, it won't be returned when filtering by `updated_since` or `updated_until`.
+- All timestamps must be ISO-8601. If timezone is missing, values are treated as UTC.
+- If only one bound is provided (`updated_since` or `updated_until`), filtering is one-sided.
+- If neither `sort` nor `updated_*` filters are provided, default ordering is by `id` ascending.
+- If any `updated_*` filter is provided and `sort` is omitted, default ordering is by `updated_date` descending with a stable tie-break on `id` ascending.
 
 ```
 {
@@ -166,6 +175,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 	    "72": {"bg_color": "#EABE5D", "presentation_ids": [525, 523], "id": 72, "name": "I am a label"},
 	    "71": {"bg_color": "#69835E", "presentation_ids": [525], "id": 71, "name": "I am a label too"}
     }
+    "count": 123,
 }
 ```
 
