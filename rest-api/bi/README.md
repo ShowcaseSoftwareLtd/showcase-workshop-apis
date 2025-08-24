@@ -130,6 +130,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 | sort          | string | Field to sort by. Allowed: `updated_date`, `id`. Defaults to `id` ascending. If any updated_* filter is provided and sort is omitted, defaults to `updated_date` descending. When sorting by `updated_date`, ties are broken by `id` ascending to keep pagination stable |
 
 Behavior notes
+- If a record has a null `updated_date`, it won't be returned when filtering by `updated_since` or `updated_until`.
 - All timestamps must be ISO-8601. If timezone is missing, values are treated as UTC.
 - If only one bound is provided (`updated_since` or `updated_until`), filtering is one-sided.
 - If neither `sort` nor `updated_*` filters are provided, default ordering is by `id` ascending.
