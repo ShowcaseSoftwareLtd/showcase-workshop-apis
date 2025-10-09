@@ -36,10 +36,13 @@ Note, every response object will have a status field that will denote if the req
 
 ### Pagination
 
-For simplification result lists are returned in sets of 100 or 1,000 (documented with each endpoint) and can 
-be a `start` parameter can be used to move through the result set. 
+For simplification result lists are returned in sets of 100 or 1,000 (documented with each endpoint).
 
-If the results were returned in batches of 100 then omitting the `start` parameter will return from 1-100. `?start=100` will return from 100-200.
+**Most endpoints** use offset-based pagination with a `start` parameter:
+- If the results were returned in batches of 100 then omitting the `start` parameter will return from 1-100. `?start=100` will return from 100-200.
+
+**Analytics events endpoint** uses cursor-based pagination with an `after_id` parameter for better performance:
+- See the `/api/v1/bi/analytics_events` section for details on cursor-based pagination.
 
 
 ## API Paths: GET
@@ -229,11 +232,25 @@ Notes:
   - `shared[x].recipient_name`: may be empty or `null` if the user did not specify it.
 
 
-## /api/v1/bi/analytics_events?from={date}
+## /api/v1/bi/analytics_events?from={date}&after_id={id}
 
 Output an array of all events (1,000 per request) from a certain date (`from` parameter specified as a ISO 8601 string) like workshop id, user id, showcase id etc.
 
-Event ID’s are unique to events across all workshops.
+Event ID's are unique to events across all workshops.
+
+#### Parameters
+| Parameter | Type   | Details                                                                                                                                                  |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from      | string | Filter by event_date inclusive lower bound. ISO-8601 timestamp (e.g., 2025-03-01T00:00:00.000000Z). Defaults to 1970-01-01 if omitted                  |
+| after_id  | number | For pagination: returns events with id greater than this value. Pass the last `id` from the previous batch to get the next page. Defaults to 0 if omitted |
+
+#### Pagination
+Results are ordered by `id` ascending and limited to 1,000 events per request. To paginate:
+1. First request: `?workshop_uid=xxx&access_token=yyy&from=2025-03-01T00:00:00.000000Z`
+2. Subsequent requests: Use the last `id` from the previous batch as `after_id`
+   - Example: `?workshop_uid=xxx&access_token=yyy&from=2025-03-01T00:00:00.000000Z&after_id=6814681351`
+
+**Note:** For optimal performance, always specify a `from` date to limit the date range. Queries without a date filter may timeout on workshops with large analytics datasets.
 
 Event types:
 
@@ -285,4 +302,3 @@ Event types:
 	}]
 }
 ```
-
