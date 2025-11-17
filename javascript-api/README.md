@@ -1,97 +1,279 @@
+# Showcase JavaScript Data API (v10)
 
+The Showcase Data API provides a simple key-value storage layer inside the Showcase app. Values persist locally on the device until the Showcase app is uninstalled or reinstalled. Any stored key can be pushed to the remote Showcase server for retrieval via the [REST API](../rest-api/README.md).
 
-Showcase Javascript Data API
-============================
+The key-value model allows for maximum flexibility - anything serializable to a string can be stored and retrieved from device memory.
 
-The data API allows storage of key value pairs into the device memory.  This memory is kept only on the current device until the
-Showcase app is removed or reinstalled.  Individual keys can be sent to the remote Showcase server.  These remotely
-saved keys and values are available from the [rest-api](../rest-api/README.md).
+---
 
-The key value model allows for maximum flexibility to program against as anything that can be serialised to a string
-can be stored and retrieved from device memory.
+## Requirements
 
+Before using the API, you must include the following in your HTML file:
 
-Setup:
+### 1. jQuery v2.1.1
 
-    // make sure the showcase-data.js file is included
+Required for compatibility with Showcase interactive elements.
 
-    var sc_data = SHOWCASE_DATA();
+```html
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+```
 
+### 2. Latest showcase-data.js (current version: 10)
 
-Save or "Put" a value:
+Older versions are missing essential API methods.
 
-    var form_data = {'first_name': 'Totoro', 'last_name': 'Ghibli'};
-    sc_data.put('current_form_data', JSON.stringify(form_data));
+```html
+<script src="showcase-data.js"></script>
+```
 
+### 3. Script Loading Rules
 
-Get a value:
+Scripts must either:
+- Use the `defer` attribute, **OR**
+- Be placed at the bottom of the `<body>`, directly before `</body>`
 
-    // register a global function for handling returned values
-    sc_data.global_get_callback(function(key, val) {
-        alert('got value ' + key + ' ' + val);
-        if (val) {
-            var form_data = JSON.parse(val);
-            alert(form_data);
-        }
-    }
-    sc_data.get('current_form_data');
+This ensures proper load order and DOM availability.
 
+---
 
-Send key to remote Showcase Workshop server:
+## Setup
 
-    // snapshot the current form data
-    sc_data.put('form_data_20130912_0912', JSON.stringify(form_data));
+### Option 1: Using `defer` (recommended)
 
-    // store it remotely
-    sc_data.store('form_data_20130912_0912');
+```html
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" defer></script>
+<script src="showcase-data.js?v=10" defer></script>
 
-Get email of the current logged in user:
-
-    // register a function for handling returned email values
-    sc_data.email_get_callback(function(email) {
-        alert('got email ' + email);
+<script defer>
+    var sc_data = SHOWCASE_DATA({
+        testMode: location.hostname === "localhost"
     });
-    sc_data.getEmail();
+</script>
+```
 
+### Option 2: Scripts at Bottom of `<body>`
 
-Hide Showcase Controls:
+```html
+<!-- Page content -->
 
-    // hide the Showcase Controls (Back Button and Tray Slider)
-    sc_data.hideControls();
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="showcase-data.js?v=10"></script>
 
-Show Showcase Controls:
+<script>
+    var sc_data = SHOWCASE_DATA({
+        testMode: location.hostname === "localhost"
+    });
+</script>
+</body>
+```
 
-    // show the Showcase Controls (Back Button and Tray Slider)
-    sc_data.showControls();
+---
 
-Execute Showcase Back Button:
+## API Methods
 
-    //navigate back to the previous Showcase screen
-    sc_data.back();
+### Storing a Value
 
-Execute Showcase Home Button:
+Save or "put" a key-value pair to local device memory:
 
-    //navigate to the portfolio listing screen (home)
-    sc_data.home();
+```javascript
+var formData = { first_name: "Totoro", last_name: "Ghibli" };
 
-Execute Showcase Share Button:
+sc_data.put("current_form_data", JSON.stringify(formData));
+```
 
-    //navigate to the portfolio listing screen (share)
-    sc_data.share();
+### Retrieving a Value
 
+You must register a callback before calling `get()`:
+
+```javascript
+// Register a global function for handling returned values
+sc_data.global_get_callback(function(key, value) {
+    console.log("Got:", key, value);
+    
+    if (value) {
+        var obj = JSON.parse(value);
+        console.log("Parsed:", obj);
+    }
+});
+
+sc_data.get("current_form_data");
+```
+
+### Saving a Key to the Remote Showcase Server
+
+Snapshot and store data remotely:
+
+```javascript
+// Create a unique snapshot key
+var snapshotKey = "form_data_" + Date.now();
+
+// Save locally
+sc_data.put(snapshotKey, JSON.stringify(formData));
+
+// Store remotely
+sc_data.store(snapshotKey);
+```
+
+### Get Email of Logged-in Showcase User
+
+```javascript
+sc_data.email_get_callback(function(email) {
+    console.log("User email:", email);
+});
+
+sc_data.getEmail();
+```
+
+---
+
+## Showcase Controls & Navigation
+
+### Hide Showcase Controls
+
+Hide the Showcase controls (Back Button and Tray Slider):
+
+```javascript
+sc_data.hideControls();
+```
+
+### Show Showcase Controls
+
+Show the Showcase controls (Back Button and Tray Slider):
+
+```javascript
+sc_data.showControls();
+```
+
+### Navigate Back
+
+Navigate back to the previous Showcase screen:
+
+```javascript
+sc_data.back();
+```
+
+### Navigate to Home
+
+Navigate to the portfolio listing screen (home):
+
+```javascript
+sc_data.home();
+```
+
+### Trigger Share
+
+Navigate to the portfolio listing screen (share):
+
+```javascript
+sc_data.share();
+```
+
+---
+
+## Example: Ranking UI With v10 API
+
+A practical example showing ranking, comments, and submitting with unique GUIDs.
+
+```javascript
+// GUID generator
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return (
+        s4() + s4() + "-" +
+        s4() + "-" +
+        s4() + "-" +
+        s4() + "-" +
+        s4() + s4() + s4()
+    );
+}
+
+// Gather results
+function getRankedData() {
+    var slots = document.querySelectorAll(".slot");
+    var ranked = [];
+
+    slots.forEach(function(slot, index) {
+        if (slot.children.length) {
+            ranked.push({
+                rank: index + 1,
+                item: slot.firstElementChild.textContent.trim(),
+                itemId: slot.firstElementChild.id
+            });
+        }
+    });
+
+    var comments = document.querySelector('input[data-field-name="comments"]').value || "";
+
+    return { ranked: ranked, comments: comments };
+}
+
+// Submit data to Showcase
+function handleSubmit(e) {
+    e.preventDefault();
+
+    var btn = e.target.closest(".btn.submit, #submitButton");
+    if (btn) {
+        btn.textContent = "Submitting...";
+        btn.disabled = true;
+    }
+
+    var data = getRankedData();
+    var key = guid();
+
+    sc_data.put(key, JSON.stringify(data));
+    sc_data.store(key);
+
+    setTimeout(function() {
+        var modal = document.getElementById("thanksModal");
+        if (modal) {
+            modal.style.display = "flex";
+            modal.setAttribute("tabindex", "-1");
+            modal.focus();
+        }
+    }, 600);
+}
+```
+
+---
+
+## Packaging Your Example (ZIP)
+
+Showcase required the package to be *.html.zip
+
+Zip files will just be loaded into the Showcase as downloadable files.
+
+### On macOS / Linux:
+
+For the simple example:
+
+```bash
+cd javascript-api/simple-example
+zip -r ../simple-example.html.zip *
+```
+
+For the quotes example:
+
+```bash
+cd javascript-api/quotes
+zip -r ../quotes.html.zip *
+```
+
+---
+
+## Version Note
+
+To avoid bugs, missing methods, or inconsistent behaviour:
+
+**Always use the latest showcase-data.js file (version 10).**
+
+---
+
+## Additional Resources
 
 See `simple-example/index.html` for a more practical example.
 
-
-### Make a Zip in Linux or macOS
-
-Sample command line syntax (assuming `simple-example` has `index.html` in it):
-
-    cd javascript-api/simple-example
-    zip -r ../simple-example.html.zip *
-
-
-Or for the quotes sample:
-
-    cd javascript-api/quotes
-    zip -r ../quotes.html.zip *
+For retrieving stored data, refer to the [REST API documentation](../rest-api/README.md).
