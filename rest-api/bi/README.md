@@ -50,7 +50,7 @@ For simplification result lists are returned in sets of 100 or 1,000 (documented
 ### /api/v1/bi/users
 
 Output an array of all users (100 per request) within the workshop with the user information.
-It will also provide info on the groups they are in and showcases that they have access to.
+It will also provide info on the groups they are in and their role.
 
 ```
 {
