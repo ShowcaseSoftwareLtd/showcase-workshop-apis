@@ -2,14 +2,13 @@
 
 Extract the raw data from your workshop so that you can include it in your for Business Intelligence Systems.
 
-
 ## General
 
 Root URL is `https://app.showcaseworkshop.com`
 
 ### Authentication
 
-All API calls are over HTTPS and are for a single Workshop.  With each request a `workshop_uid` and an `access_token ` must be supplied. These will be used to identify the workshop and authenticate the request.
+All API calls are over HTTPS and are for a single Workshop.  With each request a `workshop_uid` and an `access_token` must be supplied. These will be used to identify the workshop and authenticate the request.
 
 eg `GET https://app.showcaseworkshop.com/api/v1/bi/users?workshop_uid=xxx&access_token=yyy`
 
@@ -25,32 +24,32 @@ Blank fields are returned as `null` instead of being excluded.
 
 Standard HTTP errors are returned under error conditions.  
 
-  - `400` Invalid request 
-  - `404` Not found 
-  - `401` Authentication incorrect
-  - `403` You do not have enough permissions
-  - `500` Server had an error 
+- `400` Invalid request
+- `404` Not found
+- `401` Authentication incorrect
+- `403` You do not have enough permissions
+- `500` Server had an error
 
 Note, every response object will have a status field that will denote if the request was successful.  At present it is reserved for future use, so that we can report more complex errors than HTTP status codes.  When checking the response to an API call is valid you must always check that the HTTP response code is `200`.
-
 
 ### Pagination
 
 For simplification result lists are returned in sets of 100 or 1,000 (documented with each endpoint).
 
 **Most endpoints** use offset-based pagination with a `start` parameter:
+
 - If the results were returned in batches of 100 then omitting the `start` parameter will return from 1-100. `?start=100` will return from 100-200.
 
 **Analytics events endpoint** uses cursor-based pagination with an `after_id` parameter for better performance:
-- See the `/api/v1/bi/analytics_events` section for details on cursor-based pagination.
 
+- See the `/api/v1/bi/analytics_events` section for details on cursor-based pagination.
 
 ## API Paths: GET
 
 ### /api/v1/bi/users
 
 Output an array of all users (100 per request) within the workshop with the user information.
-It will also provide info on the groups they are in and their role.
+It will also provide info on the groups they are in and showcases that they have access to.
 
 ```
 {
@@ -76,18 +75,18 @@ Group ID’s are unique to groups across all workshops.
 
 ```
 {
-	"status": "ok",
+ "status": "ok",
     "groups": [{
-	"id": 525,
-		"name": "USA",
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"deleted_at": null
-	},{
-		"id": 523,
-		"name": "CAN",
-		"inserted_at": "2016-10-05T16:10:44.000000Z",		
-		"deleted_at": "2016-10-05T16:12:44.000000Z"
-	}]
+ "id": 525,
+  "name": "USA",
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "deleted_at": null
+ },{
+  "id": 523,
+  "name": "CAN",
+  "inserted_at": "2016-10-05T16:10:44.000000Z",  
+  "deleted_at": "2016-10-05T16:12:44.000000Z"
+ }]
 }
 ```
 
@@ -98,22 +97,22 @@ File ID’s are unique to files across all workshops.
 
 ```
 {
-	"status": "ok",
-	"files":[{
-		"id": 1,
-		"name": "Lorem.mp4",
-		"type": "movie",
-		"bytesize": 2000,
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"deleted_at": null
-	},{
-		"id": 2,
-		"name":"Ipsum.xls",
-		"type":"document",
-		"bytesize": 1234,
-		"inserted_at":"2016-10-05T16:10:44.000000Z",
-		"deleted_at":null
-	}]
+ "status": "ok",
+ "files":[{
+  "id": 1,
+  "name": "Lorem.mp4",
+  "type": "movie",
+  "bytesize": 2000,
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "deleted_at": null
+ },{
+  "id": 2,
+  "name":"Ipsum.xls",
+  "type":"document",
+  "bytesize": 1234,
+  "inserted_at":"2016-10-05T16:10:44.000000Z",
+  "deleted_at":null
+ }]
 }
 ```
 
@@ -124,6 +123,7 @@ It will also show files available to be shared and the files that are on the sli
 Showcase ID’s are unique to showcases across all workshops. Slide ID’s are unique to slides across all workshops.
 
 #### Parameters
+
 | Parameter     | Type   | Details                                                                                                                                                                                                                                                                  |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | start         | number | Determines where to start (offset) when listing showcases. Defaults to 0 if omitted                                                                                                                                                                                      |
@@ -133,6 +133,7 @@ Showcase ID’s are unique to showcases across all workshops. Slide ID’s are u
 | sort          | string | Field to sort by. Allowed: `updated_date`, `id`. Defaults to `id` ascending. If any updated_* filter is provided and sort is omitted, defaults to `updated_date` descending. When sorting by `updated_date`, ties are broken by `id` ascending to keep pagination stable |
 
 Behavior notes
+
 - If a record has a null `updated_date`, it won't be returned when filtering by `updated_since` or `updated_until`.
 - All timestamps must be ISO-8601. If timezone is missing, values are treated as UTC.
 - If only one bound is provided (`updated_since` or `updated_until`), filtering is one-sided.
@@ -141,42 +142,42 @@ Behavior notes
 
 ```
 {
-	"status": "ok",
-	"showcases": [{
+ "status": "ok",
+ "showcases": [{
         "id": 525,
-		"title": "Showcase ICT",
-		"thumbnail": "https://sample.showcaseworkshop.com/sample/thumbnail/url.png",
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"updated_at": "2016-10-05T16:12:44.000000Z",
-		"deleted_at": null,
-		"opening_video_file_id": 23,
-		"opening_slideshow_id": 43,
-		"slides": [{
-			"id": 525,
-			"slideshow_id": 43,
-			"name": "hello",
-			"thumbnail": "https://sample.showcaseworkshop.com/sample/slide/thumbnail/url.png",
+  "title": "Showcase ICT",
+  "thumbnail": "https://sample.showcaseworkshop.com/sample/thumbnail/url.png",
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "updated_at": "2016-10-05T16:12:44.000000Z",
+  "deleted_at": null,
+  "opening_video_file_id": 23,
+  "opening_slideshow_id": 43,
+  "slides": [{
+   "id": 525,
+   "slideshow_id": 43,
+   "name": "hello",
+   "thumbnail": "https://sample.showcaseworkshop.com/sample/slide/thumbnail/url.png",
             "sort_order": 0,
-			"inserted_at": "2016-10-05T16:10:44.000000Z",
-			"updated_at": "2016-10-05T16:10:44.000000Z",
-			"deleted_at": null
-			"target_file_ids: [1153, 3753],
-			"target_slide_ids: [2, 6, 99]
-		},{
-			"id": 523,
-			"slideshow_id": 44,
-			"name": "world",
-			"sort_order": 0,
-			"inserted_at": "2016-10-05T16:10:44.000000Z",
-			"deleted_at": "2016-10-05T16:12:44.000000Z"
-			"target_file_ids": []
-			"target_slide_ids: []
-		}],
-		"shareable_files": [23, 45]
-	}],
-	"labels": {
-	    "72": {"bg_color": "#EABE5D", "presentation_ids": [525, 523], "id": 72, "name": "I am a label"},
-	    "71": {"bg_color": "#69835E", "presentation_ids": [525], "id": 71, "name": "I am a label too"}
+   "inserted_at": "2016-10-05T16:10:44.000000Z",
+   "updated_at": "2016-10-05T16:10:44.000000Z",
+   "deleted_at": null
+   "target_file_ids: [1153, 3753],
+   "target_slide_ids: [2, 6, 99]
+  },{
+   "id": 523,
+   "slideshow_id": 44,
+   "name": "world",
+   "sort_order": 0,
+   "inserted_at": "2016-10-05T16:10:44.000000Z",
+   "deleted_at": "2016-10-05T16:12:44.000000Z"
+   "target_file_ids": []
+   "target_slide_ids: []
+  }],
+  "shareable_files": [23, 45]
+ }],
+ "labels": {
+     "72": {"bg_color": "#EABE5D", "presentation_ids": [525, 523], "id": 72, "name": "I am a label"},
+     "71": {"bg_color": "#69835E", "presentation_ids": [525], "id": 71, "name": "I am a label too"}
     }
     "count": 123,
 }
@@ -184,13 +185,12 @@ Behavior notes
 
 Notes:
 
-  - `showcases[x].opening_video_file_id`: Denotes the video (if any) that will play when the showcase is first opened.
-  - `showcases[x].opening_slideshow_id`: Denotes the slideshow that will show when the showcase is first opened.  A slideshow is simply a group of slides sorted by `sort_order`.
-  - `showcases[x].shareable_files`: Lists file id's that are shareable from the sharing dialog inside that showcase.  Showcases can also be configured to allow sharing of any PDF file that is included as a `target_file_id`.
-  - `showcases[x].slides[y].sort_order`: Integer representing order to present the slides in.  
-  - `showcases[x].slides[y].target_file_ids`: Slides can optionally link to files, these are listed in this array of file_ids.  
-  - `showcases[x].slides[y].target_slide_ids`: Slides can optionally link to other slides, these are listed in this array of slide_ids.  
-
+- `showcases[x].opening_video_file_id`: Denotes the video (if any) that will play when the showcase is first opened.
+- `showcases[x].opening_slideshow_id`: Denotes the slideshow that will show when the showcase is first opened.  A slideshow is simply a group of slides sorted by `sort_order`.
+- `showcases[x].shareable_files`: Lists file id's that are shareable from the sharing dialog inside that showcase.  Showcases can also be configured to allow sharing of any PDF file that is included as a `target_file_id`.
+- `showcases[x].slides[y].sort_order`: Integer representing order to present the slides in.  
+- `showcases[x].slides[y].target_file_ids`: Slides can optionally link to files, these are listed in this array of file_ids.  
+- `showcases[x].slides[y].target_slide_ids`: Slides can optionally link to other slides, these are listed in this array of slide_ids.  
 
 ### /api/v1/bi/shared?from={date}
 
@@ -201,36 +201,120 @@ Optionally you can specify results from a certain date (`from` parameter specifi
 
 ```
 {
-	"status": "ok",
-	"shared": [{
-		"id": 263,
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"shared_file_ids": [251, 2],
-		"user_id": 2,
-		"recipient_email": "mrt_ateam@example.com",
-		"recipient_name": "Mr T"
-	},{
-		"id": 256,
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"shared_file_ids": [251, 2],
-		"user_id": 5,
-		"recipient_email": "ang_airbender@example.com",
-		"recipient_name": "Ang"
-	},{
-		"id": 6253,
-		"inserted_at": "2016-10-05T16:10:44.000000Z",
-		"shared_file_ids": [251, 2],
-		"user_id": 1,
-		"recipient_email": "MulanMulan@example.com",
-		"recipient_name": "Fa Mulan"
-	}]
+ "status": "ok",
+ "shared": [{
+  "id": 263,
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "shared_file_ids": [251, 2],
+  "user_id": 2,
+  "recipient_email": "mrt_ateam@example.com",
+  "recipient_name": "Mr T"
+ },{
+  "id": 256,
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "shared_file_ids": [251, 2],
+  "user_id": 5,
+  "recipient_email": "ang_airbender@example.com",
+  "recipient_name": "Ang"
+ },{
+  "id": 6253,
+  "inserted_at": "2016-10-05T16:10:44.000000Z",
+  "shared_file_ids": [251, 2],
+  "user_id": 1,
+  "recipient_email": "MulanMulan@example.com",
+  "recipient_name": "Fa Mulan"
+ }]
 }
 ```
 
 Notes:
 
-  - `shared[x].recipient_name`: may be empty or `null` if the user did not specify it.
+- `shared[x].recipient_name`: may be empty or `null` if the user did not specify it.
 
+### /api/v1/bi/tags
+
+Output an array of all tags (50 per request by default) in the workshop with information about each tag, its creator, and associated slides.
+Results are ordered by `last_tag_date` descending.
+
+#### Parameters
+
+| Parameter | Type   | Details                                                                                                          |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| start     | number | Determines where to start (offset) when listing tags. Defaults to 0 if omitted                                   |
+| per_page  | number | Determines the amount of tags to return. Defaults to 50 if omitted or if provided with a negative value. Cannot exceed 100 |
+
+```
+{
+    "status": "ok",
+    "count": 42,
+    "tags": [{
+        "presentation_id": 525,
+        "title": "Showcase ICT",
+        "tag_uid": "abc123-def456",
+        "tag_name": "Important Slides",
+        "last_tag_date": "2016-10-05T16:10:44.000000Z",
+        "creator_email": "frankzappa@example.com",
+        "creator_name": "Frank Zappa",
+        "slide_count": 3,
+        "slide_ids": [101, 102, 103]
+    },{
+        "presentation_id": 523,
+        "title": "Showcase Sales",
+        "tag_uid": "ghi789-jkl012",
+        "tag_name": "Q4 Review",
+        "last_tag_date": "2016-10-05T16:10:44.000000Z",
+        "creator_email": "ang_airbender@example.com",
+        "creator_name": "ang_airbender@example.com",
+        "slide_count": 0,
+        "slide_ids": []
+    }]
+}
+```
+
+Notes:
+
+- `tags[x].presentation_id`: The showcase this tag belongs to.
+- `tags[x].last_tag_date`: The most recent date a slide was added to the tag, or the tag's own updated date if no slides have been added.
+- `tags[x].creator_name`: The name of the user who created the tag.  Falls back to the creator's email if no name is available.
+- `tags[x].slide_ids`: List of slide IDs associated with this tag, ordered by sort order.
+- `count`: The total number of tags in the workshop (useful for pagination).
+
+### /api/v1/bi/tag_slides?tag_uid={tag_uid}
+
+Output an array of slides for a specific tag, ordered by sort order ascending.
+
+#### Parameters
+
+| Parameter | Type   | Details                                            |
+| --------- | ------ | -------------------------------------------------- |
+| tag_uid   | string | **Required.** The unique identifier of the tag      |
+
+```
+{
+    "status": "ok",
+    "tag_uid": "abc123-def456",
+    "slides": [{
+        "slide_id": 101,
+        "slide_name": "Introduction",
+        "slide_uid": "slide-uid-001",
+        "sort_order": 0,
+        "added_at": "2016-10-05T16:10:44.000000Z",
+        "thumbnail": "https://sample.showcaseworkshop.com/sample/slide/thumbnail/url.png"
+    },{
+        "slide_id": 102,
+        "slide_name": "Overview",
+        "slide_uid": "slide-uid-002",
+        "sort_order": 1,
+        "added_at": "2016-10-05T16:12:44.000000Z",
+        "thumbnail": null
+    }]
+}
+```
+
+Notes:
+
+- `slides[x].sort_order`: Integer representing the order of the slide within the tag.
+- `slides[x].thumbnail`: URL for the slide thumbnail.  May be `null` if the thumbnail is unavailable.
 
 ## /api/v1/bi/analytics_events?from={date}&after_id={id}
 
@@ -239,13 +323,16 @@ Output an array of all events (1,000 per request) from a certain date (`from` pa
 Event ID's are unique to events across all workshops.
 
 #### Parameters
+
 | Parameter | Type   | Details                                                                                                                                                  |
 | --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | from      | string | Filter by event_date inclusive lower bound. ISO-8601 timestamp (e.g., 2025-03-01T00:00:00.000000Z). Defaults to 1970-01-01 if omitted                  |
 | after_id  | number | For pagination: returns events with id greater than this value. Pass the last `id` from the previous batch to get the next page. Defaults to 0 if omitted |
 
 #### Pagination
+
 Results are ordered by `id` ascending and limited to 1,000 events per request. To paginate:
+
 1. First request: `?workshop_uid=xxx&access_token=yyy&from=2025-03-01T00:00:00.000000Z`
 2. Subsequent requests: Use the last `id` from the previous batch as `after_id`
    - Example: `?workshop_uid=xxx&access_token=yyy&from=2025-03-01T00:00:00.000000Z&after_id=6814681351`
@@ -254,51 +341,50 @@ Results are ordered by `id` ascending and limited to 1,000 events per request. T
 
 Event types:
 
-  - `slide_view`: User views a slide
-  - `file_view`: User views a file
-  - `showcase_open`: User opens a showcase
-  - `share_send`: User sends files via sharing function
-  - `share_page_view`: Shared user views the sharing page
-  - `share_file_download`: Shared user downloads file from sharing page
-  - `email_open`: sharing email was opened (where the email client tells the server it has done this)
-
+- `slide_view`: User views a slide
+- `file_view`: User views a file
+- `showcase_open`: User opens a showcase
+- `share_send`: User sends files via sharing function
+- `share_page_view`: Shared user views the sharing page
+- `share_file_download`: Shared user downloads file from sharing page
+- `email_open`: sharing email was opened (where the email client tells the server it has done this)
 
 ```
 {
-	"status": "ok",
-	"analytics_events": [{
-		"id": 6814681351,
-		"event_type": "file_view",
-		"event_occurred_at": "2016-10-05T16:10:44.000000Z",
-		"event_duration_ms": 310,
-		"showcase_id": 525,
-		"slide_id": 51,
-		"file_id": 624,
-		"user_id": 123,   /* null if related to a shared user */
-		"shared_id": 123,  /* null unless related to a shared user */
-		"inserted_at": "2016-10-05T16:10:44.000000Z"
-	},{
-		"id": 6814681351,
-		"event_type": "something",
-		"event_occurred_at": "2016-10-05T16:10:44.000000Z",
-		"event_duration_ms": 240,
-		"showcase_id": 525,
-		"slide_id": 51,
-		"file_id": 624,
-		"user_id": null,
-		"shared_id": null,
-		"inserted_at": "2016-10-05T16:10:44.000000Z"
-	},{
-		"id": 6814681351,
-		"event_type": "something",
-		"event_occurred_at": "2016-10-05T16:10:44.000000Z",
-		"event_duration_ms: 300,
-		"showcase_id": 525,
-		"slide_id": 51,
-		"file_id": 624,
-		"user_id": null,
-		"shared_id": null,
-		"inserted_at": "2016-10-05T16:10:44.000000Z"
-	}]
+ "status": "ok",
+ "analytics_events": [{
+  "id": 6814681351,
+  "event_type": "file_view",
+  "event_occurred_at": "2016-10-05T16:10:44.000000Z",
+  "event_duration_ms": 310,
+  "showcase_id": 525,
+  "slide_id": 51,
+  "file_id": 624,
+  "user_id": 123,   /* null if related to a shared user */
+  "shared_id": 123,  /* null unless related to a shared user */
+  "inserted_at": "2016-10-05T16:10:44.000000Z"
+ },{
+  "id": 6814681351,
+  "event_type": "something",
+  "event_occurred_at": "2016-10-05T16:10:44.000000Z",
+  "event_duration_ms": 240,
+  "showcase_id": 525,
+  "slide_id": 51,
+  "file_id": 624,
+  "user_id": null,
+  "shared_id": null,
+  "inserted_at": "2016-10-05T16:10:44.000000Z"
+ },{
+  "id": 6814681351,
+  "event_type": "something",
+  "event_occurred_at": "2016-10-05T16:10:44.000000Z",
+  "event_duration_ms: 300,
+  "showcase_id": 525,
+  "slide_id": 51,
+  "file_id": 624,
+  "user_id": null,
+  "shared_id": null,
+  "inserted_at": "2016-10-05T16:10:44.000000Z"
+ }]
 }
 ```
