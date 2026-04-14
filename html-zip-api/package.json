@@ -18,6 +18,9 @@
     "url": "git+https://github.com/ShowcaseSoftwareLtd/showcase-workshop-apis.git",
     "directory": "embedded-html-api"
   },
+  "overrides": {
+    "minimatch": "^3.1.3"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "babel-jest": "^27.5.1",
