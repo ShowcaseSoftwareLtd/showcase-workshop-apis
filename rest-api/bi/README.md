@@ -121,6 +121,7 @@ File ID’s are unique to files across all workshops.
 Output an array of all showcases (100 per request) in a workshop with information about the showcase and slides.
 It will also show files available to be shared and the files that are on the slides
 Showcase ID’s are unique to showcases across all workshops. Slide ID’s are unique to slides across all workshops.
+For which groups and users can access each showcase, see `/api/v1/bi/presentations` and `/api/v1/bi/presentations/{id}`.
 
 #### Parameters
 
@@ -315,6 +316,126 @@ Notes:
 
 - `slides[x].sort_order`: Integer representing the order of the slide within the tag.
 - `slides[x].thumbnail`: URL for the slide thumbnail.  May be `null` if the thumbnail is unavailable.
+
+### /api/v1/bi/presentations
+
+Output an array of all showcases (50 per request by default) in the workshop with their access type and counts of slides and explicit access grants.
+Results are ordered by `id` ascending. For the full group and user access lists of one showcase, see `/api/v1/bi/presentations/{id}` below.
+
+#### Parameters
+
+| Parameter         | Type    | Details                                                                                                                        |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| start             | number  | Determines where to start (offset) when listing showcases. Defaults to 0 if omitted                                            |
+| per_page          | number  | Determines the amount of showcases to return. Defaults to 50 if omitted or if provided with a negative value. Cannot exceed 100 |
+| include_deleted   | boolean | Include deleted showcases (non-null `deleted_at`). Defaults to false                                                           |
+| include_templates | boolean | Include template showcases. Defaults to false                                                                                  |
+| updated_since     | string  | Filter by updated_date inclusive lower bound. ISO-8601 timestamp (e.g., 2026-08-18T00:00:00Z). Missing timezone is treated as UTC |
+| updated_until     | string  | Filter by updated_date inclusive upper bound. ISO-8601 timestamp. Missing timezone is treated as UTC                           |
+
+```
+{
+    "status": "ok",
+    "count": 42,
+    "presentations": [{
+        "id": 525,
+        "title": "Showcase ICT",
+        "publish_status": "published",
+        "access_type": "restricted",
+        "edit_access_type": "all_editors",
+        "slide_count": 42,
+        "group_count": 3,
+        "user_count": 7,
+        "inserted_at": "2016-10-05T16:10:44.000000Z",
+        "updated_at": "2016-10-05T16:10:44.000000Z",
+        "deleted_at": null
+    }]
+}
+```
+
+Notes:
+
+- `presentations[x].access_type`: `all_users` means every user in the workshop can view the showcase. `restricted` means viewing is limited to the explicit group/user grants (plus users whose role always allows viewing, see `/presentations/{id}`).
+- `presentations[x].edit_access_type`: `all_editors` means every Editor (and Admin) can edit. `restricted` means editing is limited to explicit grants (plus Admins).
+- `presentations[x].group_count` / `user_count`: The number of groups / users with an explicit *view* grant. Reported as 0 when `access_type` is `all_users`, because explicit grants are ignored in that state and access is everyone.
+- `presentations[x].publish_status`: Unpublished (draft) showcases are included; filter on this field if you only want published content.
+- `presentations[x].updated_at` reflects changes to the showcase itself; changes to access grants alone do not update it, so do not rely on `updated_since` to detect access changes.
+- `count`: The total number of showcases matching the filters (useful for pagination).
+
+### /api/v1/bi/presentations/{id}
+
+Output a single showcase with the full lists of groups and users that have access to it, and its slides.
+Returns HTTP 404 if the showcase does not exist in the workshop. Deleted and template showcases are returned (check `deleted_at` / `template`).
+
+#### Parameters
+
+| Parameter      | Type    | Details                                                     |
+| -------------- | ------- | ----------------------------------------------------------- |
+| access         | string  | Which access rule set to report: `view` (default) or `edit` |
+| include_groups | boolean | Include the `groups` array. Defaults to true                |
+| include_users  | boolean | Include the `users` array. Defaults to true                 |
+| include_slides | boolean | Include the `slides` array. Defaults to true                |
+
+```
+{
+    "status": "ok",
+    "presentation": {
+        "id": 525,
+        "title": "Showcase ICT",
+        "publish_status": "published",
+        "template": false,
+        "access_type": "restricted",
+        "edit_access_type": "all_editors",
+        "access": "view",
+        "inserted_at": "2016-10-05T16:10:44.000000Z",
+        "updated_at": "2016-10-05T16:10:44.000000Z",
+        "deleted_at": null,
+        "groups": [{
+            "id": 12,
+            "name": "Sales NZ",
+            "via": "direct",
+            "user_count": 9,
+            "granted_at": "2016-10-05T16:10:44.000000Z"
+        }],
+        "users": [{
+            "id": 88,
+            "first_name": "Fa",
+            "last_name": "Mulan",
+            "email": "MulanMulan@example.com",
+            "role": "Viewer",
+            "status": "active",
+            "via": "group",
+            "has_direct_grant": false,
+            "group_ids": [12],
+            "granted_at": null
+        }],
+        "slides": [{
+            "id": 101,
+            "name": "Welcome",
+            "sort_order": 0,
+            "slide_uid": "slide-uid-001",
+            "slideshow_id": 5
+        }]
+    }
+}
+```
+
+Notes:
+
+- `users` is the list of users who can *effectively* access the showcase under the requested `access` rule set, one entry per user.
+- `users[x].via`: Why the user has access. One of:
+  - `role`: The user's role always grants this access (for `view`: Admin, Manager, Editor and Reporter; for `edit`: Admin only).
+  - `all_users`: Granted by the showcase-wide flag (`access_type` = `all_users` grants Viewers viewing; `edit_access_type` = `all_editors` grants Editors editing).
+  - `direct`: An explicit per-user grant.
+  - `group`: Membership of a group with an explicit grant.
+  When several reasons apply, the first matching one in the order above is reported.
+- `users[x].has_direct_grant` / `group_ids`: The raw explicit assignments for the requested `access`, reported even when the user's access already comes from `role`. Use these if you only want the explicitly-assigned users ("users given access outside of a group" have `has_direct_grant` = true).
+- `users[x].granted_at`: Timestamp of the user's direct grant; `null` when there is no direct grant.
+- `users[x].status`: `invited` users have not yet activated their account but are counted, matching the in-app manage-access dialog.
+- `groups[x].via`: `direct` for an explicit group grant; `all_users` when the showcase-wide flag is set (every workshop group is then listed, with `granted_at` = `null`).
+- When the showcase-wide flag is set (`all_users` / `all_editors`), explicit grants are ignored by the app, so `via` never reports `direct`/`group` in that state even if stale grant rows exist.
+- Access lists for deleted showcases describe who *would* have access; the app itself denies access to deleted showcases.
+- `slides` is a lightweight list; for full slide detail (thumbnails, links, files) use `/api/v1/bi/detailed_showcases`.
 
 ## /api/v1/bi/analytics_events?from={date}&after_id={id}
 
